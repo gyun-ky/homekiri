@@ -5,8 +5,9 @@ HELP.md
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### SECRET ###
 
+### SECRET ###
+src/main/java/com/example/homekiri/config/secret
 
 ### STS ###
 .apt_generated
