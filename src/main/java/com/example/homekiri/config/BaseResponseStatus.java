@@ -31,9 +31,14 @@ public enum BaseResponseStatus {
 
 
     PASSWORD_ENCRYPTION_ERROR(false, "비밀번호 암호화에 실패하였습니다."),
-    PASSWORD_DECRYPTION_ERROR(false, "비밀번호 복호화에 실패하였습니다.");
+    PASSWORD_DECRYPTION_ERROR(false, "비밀번호 복호화에 실패하였습니다."),
 
 
+    /**
+     * Trend, Recommend 관련 status
+     */
+    NO_TREND_LIST_ERROR(false, "트렌드 데이터가 없습니다."),
+    INVALID_ACTIVITY_IDX(false, "존재하지 않는 엑티비티입니다.");
 
     private final boolean isSuccess;
     private final String message;
