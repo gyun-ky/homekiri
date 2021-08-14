@@ -11,7 +11,7 @@ public class FoodTrendListResponseDto {
     private String foodName;
 
     public FoodTrendListResponseDto(FoodTrend entity){
-        this.idx = entity.getId();
+        this.idx = entity.getIdx();
         this.foodIdx = entity.getFoodIdx();
         this.foodName = entity.getFoodName();
     }
