@@ -1,8 +1,8 @@
 package com.example.homekiri.recommendation.repository;
 
 
-import com.example.homekiri.dashboard.model.DessertTrend;
+import com.example.homekiri.recommendation.model.activity.FoodActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FoodRecommendListRepository extends JpaRepository<DessertTrend, Long> {
+public interface FoodRecommendListRepository extends JpaRepository<FoodActivity, Long> {
 }

@@ -58,12 +58,14 @@ public class DessertPreference {
     private Long sour;
 
     @Column(name = "bitter")
-    private Long biiter;
+    private Long bitter;
 
     @LastModifiedDate
+    @Column(name="updatedAt")
     private LocalDateTime updatedAt;
 
     @CreatedDate
+    @Column(name="createdAt")
     private LocalDateTime createdAt;
 
 
