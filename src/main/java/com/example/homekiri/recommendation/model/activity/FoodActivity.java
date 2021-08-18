@@ -1,5 +1,6 @@
 package com.example.homekiri.recommendation.model.activity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -54,5 +55,18 @@ public class FoodActivity {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @Builder
+    public FoodActivity(Long idx, Long countryIdx, String foodName, String description , String ingredient, String recipe, String temperature, String cookingState, LocalDateTime updatedAt,LocalDateTime createdAt ){
+        this.idx = idx;
+        this.countryIdx = countryIdx;
+        this.foodName = foodName;
+        this.description = description;
+        this.ingredient = ingredient;
+        this.recipe = recipe;
+        this.temperature = temperature;
+        this.cookingState = cookingState;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+    }
 }
 

@@ -16,10 +16,10 @@ public class RecommendListController {
     private final RecommendListService recommendListService;
 
     @ResponseBody
-    @GetMapping("/{UserIdx}")
-    public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long UserIdx){
+    @GetMapping("/{idx}")
+    public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long idx){
         try{
-            HashMap<String, Object> result = recommendListService.recommend(UserIdx);
+            HashMap<String, Object> result = recommendListService.recommend(idx);
             return new BaseResponse<>(result);
         }catch (BaseException e){
             return new BaseResponse<>(e.getStatus());

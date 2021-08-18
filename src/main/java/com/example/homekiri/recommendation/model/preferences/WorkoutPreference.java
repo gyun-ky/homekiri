@@ -26,13 +26,13 @@ public class WorkoutPreference {
     private Long userIdx;
 
     @Column(name = "health")
-    private Long horror;
+    private Long health;
 
     @Column(name = "yoga")
-    private Long romance;
+    private Long yoga;
 
     @Column(name = "difficulty")
-    private Long comedy;
+    private Long difficulty;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
