@@ -2,7 +2,7 @@ package com.example.demo.utils;
 
 
 import com.example.homekiri.config.BaseException;
-import com.example.demo.config.secret.Secret;
+import com.example.homekiri.config.secret.Secret;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
