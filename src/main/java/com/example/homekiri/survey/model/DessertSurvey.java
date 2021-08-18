@@ -1,6 +1,5 @@
 package com.example.homekiri.survey.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,45 +14,42 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name="FoodPreference")
-public class FoodSurvey {
+@Table(name = "DessertPreference")
+public class DessertSurvey {
     @Id
     @Column(name = "idx")
     private Long idx;
 
     private Long userIdx;
 
-    private int china;
+    private int coffee;
 
-    private int japan;
+    private int nonCoffee;
 
-    private int western;
+    private int tea;
 
-    private int korea;
+    private int smoothie;
 
-    private int noodle;
+    private int fruit;
 
-    private int pork;
+    private int bakery;
 
-    private int beef;
+    private int withice;
 
-    private int chicken;
+    private int hot;
 
-    private int rice;
+    private int cold;
 
-    private int seaFood;
+    private int sweet;
 
-    private int soup;
+    private int sour;
 
-    private int temperature;
-
-    private int raw;
-
-    private int roasted;
+    private int bitter;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @CreatedDate
     private LocalDateTime createdAt;
+
 }
