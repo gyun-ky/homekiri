@@ -7,12 +7,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      hibernate:
-        format_sql : true
   datasource:
     platform: mysql
     url: jdbc:mysql://homekiri-db.cmi4erzbiz9b.ap-northeast-2.rds.amazonaws.com/homekiri?autoReconnect=true
@@ -21,14 +17,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
     # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
 
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#      # show_sql: true 띄어쓰기 8칸
-#        format_sql : true
-#    # logging
     logging:
       config: classpath:logback-spring.xml
       level:
