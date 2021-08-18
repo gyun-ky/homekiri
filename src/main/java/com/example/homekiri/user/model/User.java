@@ -1,5 +1,6 @@
 package com.example.homekiri.user.model;
 
+import com.example.homekiri.user.dto.PostSignInReq;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,11 +19,11 @@ public class User {
     @Column(name = "idx")
     private Long idx;
 
-    private String userId;
+    private String email;
 
     private String password;
 
-    private String profileImg;
+    private String profileImg = null;
 
     private String nickName;
 
@@ -31,5 +32,11 @@ public class User {
 
     @CreatedDate
     private LocalDateTime createdAt;
+
+    public User(PostSignInReq postSignInReq, String password){
+        this.email = postSignInReq.getEmail();
+        this.password = password;
+        this.nickName = postSignInReq.getNickname();
+    }
 
 }

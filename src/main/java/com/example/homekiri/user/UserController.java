@@ -2,8 +2,9 @@ package com.example.homekiri.user;
 
 import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponse;
-import com.example.homekiri.config.BaseResponseStatus;
-import com.example.homekiri.user.model.GetMypageRes;
+import com.example.homekiri.user.dto.PostSignInReq;
+import com.example.homekiri.user.dto.PostSignInRes;
+import com.example.homekiri.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +18,23 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @ResponseBody
-//    @GetMapping("/{userIdx}/mypage")
-//    public BaseResponse<GetMypageRes> getMypage(){
-//
-//        return new BaseResponse<>(BaseResponseStatus.INVALID_JWT);
-//
-//        try{
-//            GetMypageRes result = userService.getMypage();
-//            return new BaseResponse<>(result);
-//        }
-//        catch (BaseException e){
-//            return new BaseResponse<>(e.getStatus());
-//        }
-//    }
+    /**
+     * 회원가입 API
+     * [POST] /web/users
+     * @return BaseResponse<PostSignInRes>
+     */
+    @ResponseBody
+    @PostMapping("")
+    public BaseResponse<PostSignInRes> signIn(@RequestBody PostSignInReq postSignInReq){
+        int userIdx;
+
+        try{
+            String encodedPassWord = userService.encodePassWord(postSignInReq.getPassword());
+            User user = new User(postSignInReq, encodedPassWord);
+            userIdx = UserService.signIn(user)
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
 }

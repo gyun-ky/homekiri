@@ -1,4 +1,4 @@
-package com.example.homekiri.user;
+package com.example.homekiri.user.repository;
 
 import com.example.homekiri.user.model.User;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.lang.reflect.Member;
 
 @Repository
-public class UserRepository {
+public class UserRepository{
 
     @PersistenceContext
     private EntityManager em;
