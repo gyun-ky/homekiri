@@ -5,6 +5,10 @@ spring:
   application:
     name: demo
 
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     platform: mysql
     url: jdbc:mysql://homekiri-db.cmi4erzbiz9b.ap-northeast-2.rds.amazonaws.com/homekiri?autoReconnect=true
