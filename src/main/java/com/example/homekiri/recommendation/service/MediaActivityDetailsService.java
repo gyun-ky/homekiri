@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class MediaRecommendListService {
+public class MediaActivityDetailsService {
     private final MediaRecommendListRepository mediaRecommendListRepository;
 
     @Transactional(readOnly = true)
     public MediaActivityResponseDto findById(Long idx) throws BaseException {
-        MediaActivity res = mediaRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR));
+        MediaActivity res = mediaRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new MediaActivityResponseDto(res);
     }
 }

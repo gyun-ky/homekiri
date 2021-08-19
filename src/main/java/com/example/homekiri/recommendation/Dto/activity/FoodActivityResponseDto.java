@@ -31,9 +31,9 @@ public class FoodActivityResponseDto {
     }
 
     //recipe parsing by "delim"
-    public List<String> Parsing(String r){
+    public List<String> Parsing(String Input){
         List<String> res = new ArrayList<String>();
-        StringTokenizer st1 = new StringTokenizer(r, "delim");
+        StringTokenizer st1 = new StringTokenizer(Input, "delim");
         while(st1.hasMoreTokens()){
             res.add(st1.nextToken());
         }

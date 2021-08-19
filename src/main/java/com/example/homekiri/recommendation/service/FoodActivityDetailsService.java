@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class FoodRecommendListService {
+public class FoodActivityDetailsService {
     private final FoodRecommendListRepository foodRecommendListRepository;
 
     @Transactional(readOnly = true)
     public FoodActivityResponseDto findById(Long idx) throws BaseException {
-        FoodActivity res = foodRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR));
+        FoodActivity res = foodRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new FoodActivityResponseDto(res);
     }
 }

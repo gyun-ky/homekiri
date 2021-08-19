@@ -12,13 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class DessertRecommendListService {
+public class DessertActivityDetailsService {
     private final DessertRecommendListRepository dessertRecommendListRepository;
 
+    /**
+     * 디저트 상세 설명 Service
+     * @param Long
+     * @return DessertActivityResponseDto
+     */
     @Transactional(readOnly = true)
     public DessertActivityResponseDto findById(Long idx) throws BaseException {
         System.out.println(idx);
-        DessertActivity res = dessertRecommendListRepository.findById(idx).orElseThrow(()-> new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR));
+        DessertActivity res = dessertRecommendListRepository.findById(idx).orElseThrow(()-> new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new DessertActivityResponseDto(res);
     }
 }

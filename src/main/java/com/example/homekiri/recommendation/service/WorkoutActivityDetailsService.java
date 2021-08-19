@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class WorkoutRecommendListService {
+public class WorkoutActivityDetailsService {
     private final WorkoutRecommendListRepository workoutRecommendListRepository;
 
     @Transactional(readOnly = true)
     public WorkoutActivityResponseDto findById(Long idx) throws BaseException{
-        WorkoutActivity res = workoutRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR));
+        WorkoutActivity res = workoutRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new WorkoutActivityResponseDto(res);
     }
 }
