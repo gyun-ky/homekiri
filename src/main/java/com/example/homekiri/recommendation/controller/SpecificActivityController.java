@@ -31,7 +31,9 @@ public class SpecificActivityController {
     @GetMapping("/dessert/{idx}")
     public BaseResponse<DessertActivityResponseDto> returnDessertActivity(@PathVariable Long idx){
         try{
+            System.out.println(idx);
             DessertActivityResponseDto result = dessertRecommendListService.findById(idx);
+            System.out.println(result);
             return new BaseResponse<>(result);
         }
         catch (BaseException e){

@@ -17,6 +17,7 @@ public class DessertRecommendListService {
 
     @Transactional(readOnly = true)
     public DessertActivityResponseDto findById(Long idx) throws BaseException {
+        System.out.println(idx);
         DessertActivity res = dessertRecommendListRepository.findById(idx).orElseThrow(()-> new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR));
         return new DessertActivityResponseDto(res);
     }
