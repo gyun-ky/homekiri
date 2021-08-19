@@ -3,8 +3,6 @@ package com.example.homekiri.recommendation.Dto.activity;
 import com.example.homekiri.recommendation.model.activity.WorkoutActivity;
 import lombok.Getter;
 
-import javax.persistence.Column;
-
 @Getter
 public class WorkoutActivityResponseDto {
     private Long idx;

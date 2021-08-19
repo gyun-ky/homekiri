@@ -3,8 +3,6 @@ package com.example.homekiri.recommendation.Dto.activity;
 import com.example.homekiri.recommendation.model.activity.MediaActivity;
 import lombok.Getter;
 
-import javax.persistence.Column;
-
 @Getter
 public class MediaActivityResponseDto {
     private Long idx;

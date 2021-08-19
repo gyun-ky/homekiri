@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "MediaPreference")
 public class MediaPreference {
-
     @Id
     @Column(name = "idx")
     private Long idx;

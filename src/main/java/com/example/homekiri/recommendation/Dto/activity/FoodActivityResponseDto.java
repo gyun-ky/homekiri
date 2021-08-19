@@ -3,7 +3,6 @@ package com.example.homekiri.recommendation.Dto.activity;
 import com.example.homekiri.recommendation.model.activity.FoodActivity;
 import lombok.Getter;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -12,7 +11,7 @@ import java.util.StringTokenizer;
 public class FoodActivityResponseDto {
 
     private Long idx;
-    private Long countryIdx;
+    private String country;
     private String foodName;
     private String description;
     private String ingredient;
@@ -22,7 +21,7 @@ public class FoodActivityResponseDto {
 
     public FoodActivityResponseDto(FoodActivity entity){
         this.idx = entity.getIdx();
-        this.countryIdx = entity.getCountryIdx();
+        this.country = CountryIdxToString(entity.getCountryIdx());
         this.foodName = entity.getFoodName();
         this.description = entity.getDescription();
         this.ingredient = entity.getIngredient();
@@ -39,5 +38,12 @@ public class FoodActivityResponseDto {
             res.add(st1.nextToken());
         }
         return res;
+    }
+
+    public String CountryIdxToString(Long idx){
+        if(idx == 1) return "한식";
+        else if(idx == 2) return "일식";
+        else if(idx == 3) return "중식";
+        else  return "양식";
     }
 }

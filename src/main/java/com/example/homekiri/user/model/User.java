@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-
+//외래키 preference랑 설정
 @Entity
 @Table(name="User")
 public class User {

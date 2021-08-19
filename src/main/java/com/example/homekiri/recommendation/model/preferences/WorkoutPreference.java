@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ExercisePreference")
 public class WorkoutPreference {
-
-
     @Id
     @Column(name = "idx")
     private Long idx;
