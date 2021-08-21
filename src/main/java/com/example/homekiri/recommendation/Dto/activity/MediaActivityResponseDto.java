@@ -1,6 +1,7 @@
 package com.example.homekiri.recommendation.Dto.activity;
 
 import com.example.homekiri.recommendation.model.activity.MediaActivity;
+import com.example.homekiri.recommendation.model.activity.Info.MediaImg;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -15,14 +16,20 @@ public class MediaActivityResponseDto {
     private Long screeningYear;
     private String country;
     private List<String> actorList;
+    private String description;
+    private String imgUrl;
+    //private List<String>
 
-    public MediaActivityResponseDto(MediaActivity entity){
-        this.idx = entity.getIdx();
-        this.genreIdx = entity.getGenreIdx();
-        this.mediaName = entity.getMediaName();
-        this.screeningYear = entity.getScreeningYear();
-        this.country = entity.getCountry();
-        this.actorList = Parsing(entity.getActorList());
+
+    public MediaActivityResponseDto(MediaActivity entity1, MediaImg entity2){
+        this.idx = entity1.getIdx();
+        this.genreIdx = entity1.getGenreIdx();
+        this.mediaName = entity1.getMediaName();
+        this.screeningYear = entity1.getScreeningYear();
+        this.country = entity1.getCountry();
+        this.actorList = Parsing(entity1.getActorList());
+        this.description = entity2.getDescription();
+        this.imgUrl = entity2.getImgUrl();
     }
 
     public List<String> Parsing(String Input){

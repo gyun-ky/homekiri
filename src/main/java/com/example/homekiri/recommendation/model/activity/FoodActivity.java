@@ -35,11 +35,9 @@ public class FoodActivity {
     @Column(name="ingredient")
     private String ingredient;
 
-    //자료형 확인: List형태
     @Column(name="recipe")
     private String recipe;
 
-    //자료형 확인: String or Int
     @Column(name="temparture")
     private String temperature;
 

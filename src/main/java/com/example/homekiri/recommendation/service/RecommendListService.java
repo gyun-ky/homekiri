@@ -56,23 +56,40 @@ public class RecommendListService {
         WorkoutPreference workoutPreference = workoutPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_USER_IDX));
 
 
+        List<MediaActivityResponseDto> TempMediaList = new ArrayList<>();
+        List<FoodActivityResponseDto> TempFoodList = new ArrayList<>();
+        List<DessertActivityResponseDto> TempDessertList = new ArrayList<>();
+        List<WorkoutActivityResponseDto> TempWorkoutList = new ArrayList<>();
+
+
+        /**
+         *Dessert Preference
+         */
+//        if(dessertPreference.getCoffee() >= 70)
+//            TempDessertList.add()
+
+        if(TempMediaList.size() < 8  || TempFoodList.size() < 8 || TempDessertList.size() < 8 || TempWorkoutList.size() < 8)
+            throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);
+
+
+        Collections.shuffle(TempMediaList);
+        Collections.shuffle(TempFoodList);
+        Collections.shuffle(TempDessertList);
+        Collections.shuffle(TempWorkoutList);
+
+
         List<MediaActivityResponseDto> mediaActivities = new ArrayList<>();
         List<FoodActivityResponseDto> foodActivities = new ArrayList<>();
         List<DessertActivityResponseDto> dessertActivities = new ArrayList<>();
         List<WorkoutActivityResponseDto> workoutActivities = new ArrayList<>();
 
-        /**
-         * 추천 시스템...
-         */
 
-        if(mediaActivities.isEmpty() || foodActivities.isEmpty() || dessertActivities.isEmpty() || workoutActivities.isEmpty())
-            throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);
-
-
-        Collections.shuffle(mediaActivities);
-        Collections.shuffle(foodActivities);
-        Collections.shuffle(dessertActivities);
-        Collections.shuffle(workoutActivities);
+        for(int i = 0; i <8; ++i){
+            mediaActivities.add(TempMediaList.get(i));
+            foodActivities.add(TempFoodList.get(i));
+            dessertActivities.add(TempDessertList.get(i));
+            workoutActivities.add(TempWorkoutList.get(i));
+        }
 
         HashMap<String, Object> map = new HashMap<String, Object>();
 
