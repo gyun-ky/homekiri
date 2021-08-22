@@ -68,9 +68,9 @@ public class RecommendListService {
         /**
          *Dessert Preference
          */
-        if(dessertPreference.getCoffee() >= 70) {
-            List<Drink> res =
-        }
+//        if(dessertPreference.getCoffee() >= 70) {
+//            List<Drink> res =
+//        }
 
         if(TempMediaList.size() < 8  || TempFoodList.size() < 8 || TempDessertList.size() < 8 || TempWorkoutList.size() < 8)
             throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);

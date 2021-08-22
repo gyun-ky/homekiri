@@ -23,5 +23,5 @@ public class DessertActivityResponseDto {
         this.imgUrl = entity2.getImgUrl();
     }
 
-    public DessertActivityResponseDto(Drink entity)
+//    public DessertActivityResponseDto(Drink entity)
 }
