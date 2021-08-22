@@ -36,10 +36,13 @@ public class DessertTrend {
     @CreatedDate
     private LocalDateTime createdAt;
 
-//    @Builder
-//    public DessertTrend(Long dessertIdx, String dessertName, int ranking){
-//        this.dessertIdx = dessertIdx;
-//        this.dessertName = dessertName;
-//        this.ranking = ranking;
-//    }
+    @Builder
+    public DessertTrend(Long idx, Long dessertIdx, String dessertName, int ranking, LocalDateTime updatedAt, LocalDateTime createdAt){
+        this.idx = idx;
+        this.dessertIdx = dessertIdx;
+        this.dessertName = dessertName;
+        this.ranking = ranking;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+    }
 }

@@ -35,10 +35,12 @@ public enum BaseResponseStatus {
 
 
     /**
-     * Trend, Recommend 관련 status
+     * Trend, Recommendation 관련 status
      */
     NO_TREND_LIST_ERROR(false, "트렌드 데이터가 없습니다."),
-    INVALID_ACTIVITY_IDX(false, "존재하지 않는 엑티비티입니다.");
+    ACTIVITY_IDX_ERROR(false, "존재하지 않는 엑티비티입니다."),
+    INVALID_USER_IDX(false, "존재하지 않는 User입니다."),
+    PREFERENCE_LACK_ERROR(false, "선호도 데이터가 부족합니다.");
 
     private final boolean isSuccess;
     private final String message;

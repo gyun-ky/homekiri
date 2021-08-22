@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity
-//@Builder
 @Table(name = "WorkoutTrend")
 public class WorkoutTrend{
     @Id
@@ -36,4 +35,14 @@ public class WorkoutTrend{
 
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @Builder
+    public WorkoutTrend(Long idx, Long workoutIdx, String workoutName, int ranking, LocalDateTime updatedAt, LocalDateTime createdAt){
+        this.idx = idx;
+        this.workoutIdx = workoutIdx;
+        this.workoutName = workoutName;
+        this.ranking = ranking;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+    }
 }

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class FoodTrend {
     @Id
     @Column(name = "idx")
-    private Long id;
+    private Long idx;
 
     @Column(name = "foodIdx")
     private Long foodIdx;
@@ -37,4 +37,13 @@ public class FoodTrend {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @Builder
+    public FoodTrend(Long idx, Long foodIdx, String foodName, int ranking, LocalDateTime updatedAt, LocalDateTime createdAt){
+        this.idx = idx;
+        this.foodIdx = foodIdx;
+        this.foodName = foodName;
+        this.ranking = ranking;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+    }
 }
