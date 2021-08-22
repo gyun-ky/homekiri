@@ -10,12 +10,14 @@ import com.example.homekiri.recommendation.Dto.activity.MediaActivityResponseDto
 import com.example.homekiri.recommendation.Dto.activity.WorkoutActivityResponseDto;
 import com.example.homekiri.recommendation.model.activity.DessertActivity;
 import com.example.homekiri.recommendation.model.activity.FoodActivity;
+import com.example.homekiri.recommendation.model.activity.Info.Drink;
 import com.example.homekiri.recommendation.model.activity.MediaActivity;
 import com.example.homekiri.recommendation.model.activity.WorkoutActivity;
 import com.example.homekiri.recommendation.model.preferences.DessertPreference;
 import com.example.homekiri.recommendation.model.preferences.FoodPreference;
 import com.example.homekiri.recommendation.model.preferences.MediaPreference;
 import com.example.homekiri.recommendation.model.preferences.WorkoutPreference;
+import com.example.homekiri.recommendation.repository.ActivitySpecifics.DrinkRepository;
 import com.example.homekiri.recommendation.repository.DessertRecommendListRepository;
 import com.example.homekiri.recommendation.repository.FoodRecommendListRepository;
 import com.example.homekiri.recommendation.repository.MediaRecommendListRepository;
@@ -41,6 +43,7 @@ public class RecommendListService {
     private final MediaPreferenceRepository mediaPreferenceRepository;
     private final WorkoutPreferenceRepository workoutPreferenceRepository;
 
+    private final DrinkRepository drinkRepository;
     private final DessertRecommendListRepository dessertRecommendListRepository;
     private final FoodRecommendListRepository foodRecommendListRepository;
     private final MediaRecommendListRepository mediaRecommendListRepository;
@@ -65,8 +68,9 @@ public class RecommendListService {
         /**
          *Dessert Preference
          */
-//        if(dessertPreference.getCoffee() >= 70)
-//            TempDessertList.add()
+        if(dessertPreference.getCoffee() >= 70) {
+            List<Drink> res =
+        }
 
         if(TempMediaList.size() < 8  || TempFoodList.size() < 8 || TempDessertList.size() < 8 || TempWorkoutList.size() < 8)
             throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);

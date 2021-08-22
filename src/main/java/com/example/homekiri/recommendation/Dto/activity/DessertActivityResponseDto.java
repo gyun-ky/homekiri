@@ -2,6 +2,7 @@ package com.example.homekiri.recommendation.Dto.activity;
 
 import com.example.homekiri.recommendation.model.activity.DessertActivity;
 import com.example.homekiri.recommendation.model.activity.Info.DessertImage;
+import com.example.homekiri.recommendation.model.activity.Info.Drink;
 import lombok.Getter;
 
 @Getter
@@ -22,4 +23,5 @@ public class DessertActivityResponseDto {
         this.imgUrl = entity2.getImgUrl();
     }
 
+    public DessertActivityResponseDto(Drink entity)
 }
