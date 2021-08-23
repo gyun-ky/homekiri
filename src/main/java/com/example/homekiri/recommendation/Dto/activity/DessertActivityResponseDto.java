@@ -23,4 +23,5 @@ public class DessertActivityResponseDto {
         this.imgUrl = entity2.getImgUrl();
     }
 
+   
 }
