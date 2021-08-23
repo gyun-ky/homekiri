@@ -3,6 +3,8 @@ package com.example.homekiri.user;
 import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponse;
 import com.example.homekiri.library.JwtService;
+import com.example.homekiri.user.dto.PostLogInReq;
+import com.example.homekiri.user.dto.PostLogInRes;
 import com.example.homekiri.user.dto.PostSignInReq;
 import com.example.homekiri.user.dto.PostSignInRes;
 import com.example.homekiri.user.model.User;
@@ -29,7 +31,7 @@ public class UserController {
      * @return BaseResponse<PostSignInRes>
      */
     @ResponseBody
-    @PostMapping("")
+    @PostMapping("/sign-in")
     public BaseResponse<PostSignInRes> signIn(@RequestBody PostSignInReq postSignInReq){
 
         try{
@@ -38,6 +40,22 @@ public class UserController {
             Long userIdx = userService.signIn(user);
             String jwt = jwtService.createJwt(userIdx);
             PostSignInRes result = new PostSignInRes(userIdx, jwt);
+            return new BaseResponse<>(result);
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    /**
+     * 로그인 API
+     * [POST] /web/users/log-in
+     * @return BaseResponse<PostLogInRes>
+     */
+    @ResponseBody
+    @PostMapping("/log-in")
+    public BaseResponse<PostLogInRes> logIn(@RequestBody PostLogInReq postLogInReq){
+        try{
+            PostLogInRes result = userService.logIn(postLogInReq.getEmail(), postLogInReq.getPassword());
             return new BaseResponse<>(result);
         }catch (BaseException e){
             return new BaseResponse<>(e.getStatus());

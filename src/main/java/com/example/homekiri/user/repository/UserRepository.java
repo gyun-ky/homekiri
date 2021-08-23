@@ -28,7 +28,12 @@ public class UserRepository{
         return em.find(User.class, userIdx);
     }
 
-//    public User find
+    public User findSingleUserByEmail(String email){
+        User result = em.createQuery("select u from User u where u.email = :email", User.class)
+                .setParameter("email", email).getSingleResult();
+        System.out.println("[JPA] findUserByEmail complete");
+        return result;
+    }
 
     public List<User> findByEmail(String email){
         List<User> result = em.createQuery("select u from User u where u.email = :email", User.class)
