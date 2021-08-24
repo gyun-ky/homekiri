@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-/**
+/*
  * 디저트 트렌드 Service
  * @param Null
  * @return List<DessertTrendListResponseDto>

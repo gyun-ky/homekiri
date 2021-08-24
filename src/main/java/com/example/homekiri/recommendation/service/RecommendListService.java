@@ -79,7 +79,8 @@ public class RecommendListService {
 
         int RECOMMEND_SIZE = 8;
         int RECOMMEND_SCORE = 70;
-        /**
+
+        /*
          * Food Preference
          */
         //소고기 선호도
@@ -92,7 +93,7 @@ public class RecommendListService {
                 TempFoodList.add(temp);
             }
         }
-        //치킨 선호도
+        //닭고기 선호도
         if(foodPreference.getChicken()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("닭고기");
             for(int i = 0; i < res.size(); ++i){
@@ -102,9 +103,9 @@ public class RecommendListService {
                 TempFoodList.add(temp);
             }
         }
-        //돼지고기 선호도
-        if(foodPreference.getPork()>=RECOMMEND_SCORE){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("돼지고기");
+        //면 선호도
+        if(foodPreference.getNoodle()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("면");
             for(int i = 0; i < res.size(); ++i){
                 FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
                 FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
@@ -112,9 +113,9 @@ public class RecommendListService {
                 TempFoodList.add(temp);
             }
         }
-        //돼지고기 선호도
-        if(foodPreference.getPork()>=RECOMMEND_SCORE){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("돼지고기");
+        //밥 선호도
+        if(foodPreference.getRice()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("밥");
             for(int i = 0; i < res.size(); ++i){
                 FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
                 FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
@@ -122,9 +123,18 @@ public class RecommendListService {
                 TempFoodList.add(temp);
             }
         }
-        //돼지고기 선호도
-        if(foodPreference.getPork()>=RECOMMEND_SCORE){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("돼지고기");
+        //온도 선호도
+        if(foodPreference.getTemperature()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByTemperature("HOT");
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        else {
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByTemperatureOrTemperature("NORMAL", "COLD");
             for(int i = 0; i < res.size(); ++i){
                 FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
                 FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
@@ -137,16 +147,78 @@ public class RecommendListService {
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(1L);
             for(int i = 0; i < res.size(); ++i){
                 FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
-
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //일국음식 선호도
+        if(foodPreference.getJapan()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(2L);
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //중국음식 선호도
+        if(foodPreference.getChina()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(3L);
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //양식 선호도
+        if(foodPreference.getWestern()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(4L);
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //날것 선호도
+        if(foodPreference.getRaw()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("raw");
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //국물 선호도
+        if(foodPreference.getSoup()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("soup");
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
+            }
+        }
+        //익힌거 선호도
+        if(foodPreference.getRoasted()>=RECOMMEND_SCORE){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("roasted");
+            for(int i = 0; i < res.size(); ++i){
+                FoodActivity res1 = foodRecommendListRepository.findById(res.get(i).getIdx()).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
+                FoodImage res2 = foodImgRepository.findFoodImageByFoodIdx(res.get(i).getIdx());
+                FoodActivityResponseDto temp = new FoodActivityResponseDto(res1, res2);
+                TempFoodList.add(temp);
             }
         }
 
-
-        /**
+        /*
          * Media Preference
          */
 
-        /**
+
+        /*
          *Dessert Preference
          */
         //카페인 선호도
@@ -241,11 +313,13 @@ public class RecommendListService {
         }
         //과일류 선호도
 
-        /**
+        /*
          * Workout Preference
          */
 
-        if(TempMediaList.size() < 8  || TempFoodList.size() < 8 || TempDessertList.size() < 8 || TempWorkoutList.size() < 8)
+
+
+        if(TempMediaList.size() < RECOMMEND_SIZE  || TempFoodList.size() < RECOMMEND_SIZE || TempDessertList.size() < RECOMMEND_SIZE || TempWorkoutList.size() < RECOMMEND_SIZE)
             throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);
 
 

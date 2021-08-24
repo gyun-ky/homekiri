@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@Table(name="MediaImage")
+@Table(name="ExerciseVideo")
 @Entity
 public class WorkoutVideo {
     @Id

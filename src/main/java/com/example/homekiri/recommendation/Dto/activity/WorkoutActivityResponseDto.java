@@ -9,7 +9,7 @@ import lombok.Getter;
 public class WorkoutActivityResponseDto {
     private Long idx;
     private Long typeIdx;
-    private Long difficultyIdx;
+    private String difficulty;
     private String target;
     private String exerciseName;
     private String description;
@@ -19,7 +19,7 @@ public class WorkoutActivityResponseDto {
     public WorkoutActivityResponseDto(WorkoutActivity entity, WorkoutImg entity2, WorkoutVideo entity3){
         this.idx = entity.getIdx();
         this.typeIdx = entity.getTypeIdx();
-        this.difficultyIdx = entity.getDifficultyIdx();
+        this.difficulty = DifficultyIdxToDifficulty(entity.getDifficultyIdx());
         this.target = TypeIdxToString(entity.getTargetIdx());
         this.exerciseName = entity.getExerciseName();
         this.description = entity.getDescription();
@@ -39,4 +39,10 @@ public class WorkoutActivityResponseDto {
         else
             return "Front";
     }
+    public String DifficultyIdxToDifficulty(Long difficultyIdx){
+        if(difficultyIdx == 1) return "Beginner";
+        else if(difficultyIdx == 2) return "Intermediate";
+        else return "Advanced";
+    }
+
 }

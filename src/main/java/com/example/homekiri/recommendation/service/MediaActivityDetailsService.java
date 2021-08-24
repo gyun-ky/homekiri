@@ -19,6 +19,8 @@ public class MediaActivityDetailsService {
 
     @Transactional(readOnly = true)
     public MediaActivityResponseDto findById(Long idx) throws BaseException {
+        if(idx == -1)
+            throw new BaseException(BaseResponseStatus.MEDIA_DATA_LACK_ERROR);
         MediaActivity res1 = mediaRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         MediaImg res2 = mediaImgRepository.findMediaImgByMediaIdx(idx);
         return new MediaActivityResponseDto(res1, res2);

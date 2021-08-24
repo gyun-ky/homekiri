@@ -27,6 +27,9 @@ public class MediaActivity {
     @Column(name="mediaName")
     private String mediaName;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name="screeningYear")
     private Long screeningYear;
 
