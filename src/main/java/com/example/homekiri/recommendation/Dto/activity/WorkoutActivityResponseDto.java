@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class WorkoutActivityResponseDto {
     private Long idx;
-    private Long typeIdx;
+    private String type;
     private String difficulty;
     private String target;
     private String exerciseName;
@@ -18,23 +18,23 @@ public class WorkoutActivityResponseDto {
 
     public WorkoutActivityResponseDto(WorkoutActivity entity, WorkoutImg entity2, WorkoutVideo entity3){
         this.idx = entity.getIdx();
-        this.typeIdx = entity.getTypeIdx();
+        this.type = TypeIdxToType(entity.getTypeIdx());
         this.difficulty = DifficultyIdxToDifficulty(entity.getDifficultyIdx());
-        this.target = TypeIdxToString(entity.getTargetIdx());
+        this.target = TargetIdxToString(entity.getTargetIdx());
         this.exerciseName = entity.getExerciseName();
         this.description = entity.getDescription();
         this.imgUrl = entity2.getImgUrl();
         this.videoUrl = entity3.getVideoUrl();
     }
 
-    public String TypeIdxToString(Long typeIdx){
-        if(typeIdx == 1)
+    public String TargetIdxToString(Long targetIdx){
+        if(targetIdx == 1)
             return "Back";
-        else if(typeIdx == 2)
+        else if(targetIdx == 2)
             return "Leg";
-        else if(typeIdx == 3)
+        else if(targetIdx == 3)
             return "Full_Body";
-        else if(typeIdx == 4)
+        else if(targetIdx == 4)
             return "Arm";
         else
             return "Front";
@@ -44,5 +44,9 @@ public class WorkoutActivityResponseDto {
         else if(difficultyIdx == 2) return "Intermediate";
         else return "Advanced";
     }
-
+    public String TypeIdxToType(Long typeIdx){
+        if(typeIdx == 1) return "요가";
+        else if(typeIdx == 2) return "헬스";
+        else return "기타";
+    }
 }
