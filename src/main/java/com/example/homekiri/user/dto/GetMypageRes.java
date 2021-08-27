@@ -7,7 +7,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class GetMypageRes {
-    private User user;
+    private String nickname;
+    private String profileImageUrl;
+
 
 }
 

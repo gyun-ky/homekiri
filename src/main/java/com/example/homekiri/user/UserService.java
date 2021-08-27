@@ -116,4 +116,10 @@ public class UserService {
 
     }
 
+    /**
+     마이페이지 Service
+     @param String email String password
+     @return PostLogInRes
+     */
+
 }
