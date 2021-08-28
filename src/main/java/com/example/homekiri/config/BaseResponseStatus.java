@@ -20,6 +20,7 @@ public enum BaseResponseStatus {
     INVALID_USER_JWT(false,"권한이 없는 유저의 접근입니다."),
     DUPLICATE_USER_EMAIL(false, "중복된 이메일입니다"),
     DUPLICATE_USER_NICKNAME(false, "중복된 닉네임입니다"),
+    PASSWORD_NOT_MATCH(false, "비밀번호가 일치하지 않습니다"),
 
     /**
      * Stroy 관련 status
