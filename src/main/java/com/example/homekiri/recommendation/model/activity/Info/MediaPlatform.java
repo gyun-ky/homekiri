@@ -6,27 +6,27 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@Table(name="DessertImage")
+@Table(name="Media_Platform")
 @Entity
-public class DessertImage {
-
+public class MediaPlatform {
     @Id
     @Column(name ="idx")
     private Long idx;
 
-    @Column(name = "dessertIdx")
-    private Long dessertIdx;
+    @Column(name = "mediaIdx")
+    private Long mediaIdx;
 
-    @Column(name = "imgUrl")
-    private String imgUrl;
+    @Column(name = "platformIdx")
+    private String platformIdx;
 
-    @Column(name = "description")
-    private String description;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -37,11 +37,10 @@ public class DessertImage {
     private LocalDateTime createdAt;
 
     @Builder
-    public DessertImage(Long idx, Long dessertIdx, String description, String imgUrl, LocalDateTime createdAt, LocalDateTime updatedAt){
+    public MediaPlatform(Long idx, Long mediaIdx, String platformIdx , LocalDateTime updatedAt, LocalDateTime createdAt){
         this.idx = idx;
-        this.dessertIdx = dessertIdx;
-        this.imgUrl =  imgUrl;
-        this.description = description;
+        this.mediaIdx = mediaIdx;
+        this.platformIdx = platformIdx;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

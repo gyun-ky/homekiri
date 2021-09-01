@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,8 +14,8 @@ import java.time.LocalDateTime;
 @Table(name="Exercise")
 @Entity
 public class WorkoutActivity {
-    @Column(name="idx")
     @Id
+    @Column(name="idx")
     private Long idx;
 
     @Column(name="typeIdx")
