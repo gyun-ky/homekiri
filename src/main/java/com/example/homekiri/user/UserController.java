@@ -2,11 +2,9 @@ package com.example.homekiri.user;
 
 import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponse;
+import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.library.JwtService;
-import com.example.homekiri.user.dto.PostLogInReq;
-import com.example.homekiri.user.dto.PostLogInRes;
-import com.example.homekiri.user.dto.PostSignInReq;
-import com.example.homekiri.user.dto.PostSignInRes;
+import com.example.homekiri.user.dto.*;
 import com.example.homekiri.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -86,9 +84,22 @@ public class UserController {
      * [GET] /web/users/mypage/{userIdx}
      * @return BaseResponse<GetMypageRes>
      */
-//    public BaseResponse<GetMypageRes> mypage(@PathVariable Long userIdx){
-//
-//    }
+    @ResponseBody
+    @GetMapping("/mypage/{userIdx}")
+    public BaseResponse<GetMypageRes> mypage(@PathVariable Long userIdx){
+        //jwt 인증
+        try {
+            if (jwtAuth(userIdx) == false) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
+
+        GetMypageRes result = new GetMypageRes("tmp", "tmp");
+        return new BaseResponse<>(result);
+
+    }
 
 
 
