@@ -31,9 +31,18 @@ public class DessertActivity {
     @Column(name="description")
     private String description;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idx")
     private DessertImage dessertImage;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idx")
+    private Drink drink;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idx")
+    private NonDrink nonDrink;
+
 
     @Column(name="updatedAt")
     @LastModifiedDate

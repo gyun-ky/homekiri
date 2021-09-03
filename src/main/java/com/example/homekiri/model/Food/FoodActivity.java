@@ -39,7 +39,7 @@ public class FoodActivity {
     @Column(name="cookingState")
     private String cookingState;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idx", updatable = false, insertable = false)
     private FoodImage foodImage;
 

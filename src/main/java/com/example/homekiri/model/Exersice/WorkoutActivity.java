@@ -38,11 +38,11 @@ public class WorkoutActivity {
     private LocalDateTime updatedAt;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idx")
     private WorkoutImg workoutImg;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idx")
     private WorkoutVideo workoutVideo;
 

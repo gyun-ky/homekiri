@@ -8,6 +8,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -36,9 +38,12 @@ public class MediaActivity {
     @Column(name="actorList")
     private String actorList;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idx", updatable = false, insertable = false)
     private MediaImg  mediaImg;
+
+    @OneToMany(mappedBy = "mediaActivity")
+    private List<MediaPlatform> mediaPlatformList = new ArrayList<>();
 
     @Column(name="updatedAt")
     @LastModifiedDate
