@@ -24,7 +24,7 @@ public class MediaPlatform {
     @Column(name = "platformIdx")
     private String platformIdx;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idx", insertable = false, updatable = false)
     private MediaActivity mediaActivity;
 

@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -32,6 +29,9 @@ public class Drink {
 
     @Column(name = "flavor")
     private String flavor;
+
+    @OneToOne(mappedBy = "drink")
+    private DessertActivity dessertActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate
