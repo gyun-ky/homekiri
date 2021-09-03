@@ -1,8 +1,7 @@
 package com.example.homekiri.recommendation.Dto.ActivityRecommendDto;
 
-import com.example.homekiri.recommendation.model.activity.Info.WorkoutImg;
-import com.example.homekiri.recommendation.model.activity.Info.WorkoutVideo;
-import com.example.homekiri.recommendation.model.activity.WorkoutActivity;
+import com.example.homekiri.model.Exersice.WorkoutImg;
+import com.example.homekiri.model.Exersice.WorkoutActivity;
 import lombok.Getter;
 
 @Getter
@@ -12,11 +11,11 @@ public class WorkoutRecommendDto {
     private String exerciseName;
     private String imgUrl;
 
-    public WorkoutRecommendDto(WorkoutActivity entity, WorkoutImg entity2){
+    public WorkoutRecommendDto(WorkoutActivity entity){
         this.idx = entity.getIdx();
         this.type = TypeIdxToType(entity.getTypeIdx());
         this.exerciseName = entity.getExerciseName();
-        this.imgUrl = entity2.getImgUrl();
+        this.imgUrl = entity.getWorkoutImg().getImgUrl();
     }
     public String TypeIdxToType(Long typeIdx){
         if(typeIdx == 1) return "요가";

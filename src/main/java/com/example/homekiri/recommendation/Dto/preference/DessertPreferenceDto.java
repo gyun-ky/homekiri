@@ -1,6 +1,6 @@
 package com.example.homekiri.recommendation.Dto.preference;
 
-import com.example.homekiri.recommendation.model.preferences.DessertPreference;
+import com.example.homekiri.model.preferences.DessertPreference;
 import lombok.Getter;
 
 @Getter

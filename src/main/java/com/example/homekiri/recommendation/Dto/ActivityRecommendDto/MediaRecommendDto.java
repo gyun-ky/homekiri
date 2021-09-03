@@ -1,7 +1,7 @@
 package com.example.homekiri.recommendation.Dto.ActivityRecommendDto;
 
-import com.example.homekiri.recommendation.model.activity.Info.MediaImg;
-import com.example.homekiri.recommendation.model.activity.MediaActivity;
+import com.example.homekiri.model.Media.MediaImg;
+import com.example.homekiri.model.Media.MediaActivity;
 import lombok.Getter;
 
 @Getter
@@ -11,11 +11,11 @@ public class MediaRecommendDto {
     private String mediaName;
     private String imgUrl;
 
-    public MediaRecommendDto(MediaActivity entity1, MediaImg entity2){
+    public MediaRecommendDto(MediaActivity entity1){
         this.idx = entity1.getIdx();
         this.category = GenreIdxToGenre( entity1.getGenreIdx());
         this.mediaName = entity1.getMediaName();
-        this.imgUrl = entity2.getImgUrl();
+        this.imgUrl = entity1.getMediaImg().getImgUrl();
     }
     public String GenreIdxToGenre(Long genreIdx){
         if(genreIdx == 1) return "SF";

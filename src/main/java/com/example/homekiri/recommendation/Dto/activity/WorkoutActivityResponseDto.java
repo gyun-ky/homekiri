@@ -1,8 +1,8 @@
 package com.example.homekiri.recommendation.Dto.activity;
 
-import com.example.homekiri.recommendation.model.activity.Info.WorkoutImg;
-import com.example.homekiri.recommendation.model.activity.Info.WorkoutVideo;
-import com.example.homekiri.recommendation.model.activity.WorkoutActivity;
+import com.example.homekiri.model.Exersice.WorkoutImg;
+import com.example.homekiri.model.Exersice.WorkoutVideo;
+import com.example.homekiri.model.Exersice.WorkoutActivity;
 import lombok.Getter;
 
 @Getter
@@ -16,15 +16,15 @@ public class WorkoutActivityResponseDto {
     private String imgUrl;
     private String videoUrl;
 
-    public WorkoutActivityResponseDto(WorkoutActivity entity, WorkoutImg entity2, WorkoutVideo entity3){
+    public WorkoutActivityResponseDto(WorkoutActivity entity){
         this.idx = entity.getIdx();
         this.type = TypeIdxToType(entity.getTypeIdx());
         this.difficulty = DifficultyIdxToDifficulty(entity.getDifficultyIdx());
         this.target = TargetIdxToString(entity.getTargetIdx());
         this.exerciseName = entity.getExerciseName();
         this.description = entity.getDescription();
-        this.imgUrl = entity2.getImgUrl();
-        this.videoUrl = entity3.getVideoUrl();
+        this.imgUrl = entity.getWorkoutImg().getImgUrl();
+        this.videoUrl = entity.getWorkoutVideo().getVideoUrl();
     }
 
     public String TargetIdxToString(Long targetIdx){

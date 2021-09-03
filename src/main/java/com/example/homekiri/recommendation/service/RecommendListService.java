@@ -2,23 +2,19 @@ package com.example.homekiri.recommendation.service;
 
 import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponseStatus;
+import com.example.homekiri.model.Dessert.Drink;
+import com.example.homekiri.model.Dessert.NonDrink;
 import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.DessertRecommendDto;
 import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.FoodRecommendDto;
 import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.MediaRecommendDto;
 import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.WorkoutRecommendDto;
-import com.example.homekiri.recommendation.Dto.activity.DessertActivityResponseDto;
-import com.example.homekiri.recommendation.Dto.activity.FoodActivityResponseDto;
-import com.example.homekiri.recommendation.Dto.activity.MediaActivityResponseDto;
-import com.example.homekiri.recommendation.Dto.activity.WorkoutActivityResponseDto;
-import com.example.homekiri.recommendation.model.activity.DessertActivity;
-import com.example.homekiri.recommendation.model.activity.FoodActivity;
-import com.example.homekiri.recommendation.model.activity.Info.*;
-import com.example.homekiri.recommendation.model.activity.MediaActivity;
-import com.example.homekiri.recommendation.model.activity.WorkoutActivity;
-import com.example.homekiri.recommendation.model.preferences.DessertPreference;
-import com.example.homekiri.recommendation.model.preferences.FoodPreference;
-import com.example.homekiri.recommendation.model.preferences.MediaPreference;
-import com.example.homekiri.recommendation.model.preferences.WorkoutPreference;
+import com.example.homekiri.model.Food.FoodActivity;
+import com.example.homekiri.model.Media.MediaActivity;
+import com.example.homekiri.model.Exersice.WorkoutActivity;
+import com.example.homekiri.model.preferences.DessertPreference;
+import com.example.homekiri.model.preferences.FoodPreference;
+import com.example.homekiri.model.preferences.MediaPreference;
+import com.example.homekiri.model.preferences.WorkoutPreference;
 import com.example.homekiri.recommendation.repository.ActivitySpecifics.*;
 import com.example.homekiri.recommendation.repository.DessertRecommendListRepository;
 import com.example.homekiri.recommendation.repository.FoodRecommendListRepository;
@@ -46,14 +42,9 @@ public class RecommendListService {
 
 
     //Activity Info
-    private final DessertImageRepository dessertImageRepository;
     private final DrinkRepository drinkRepository;
     private final nonDrinkRepository nonDrinkRepository;
-    private final MediaImgRepository mediaImgRepository;
-    private final MediaPlatformRepository mediaPlatformRepository;
-    private final FoodImgRepository foodImgRepository;
-    private final WorkoutImgRepository workoutImgRepository;
-    private final WorkoutVideoRepository workoutVideoRepository;
+
 
     //Activity Repo
     private final DessertRecommendListRepository dessertRecommendListRepository;
@@ -85,27 +76,27 @@ public class RecommendListService {
         //소고기 선호도
         if(foodPreference.getBeef() >= RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("소고기");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //닭고기 선호도
         else if(foodPreference.getChicken()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("닭고기");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //닭고기 선호도
         else if(foodPreference.getPork()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("돼지고기");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
@@ -113,98 +104,98 @@ public class RecommendListService {
         //면 선호도
         if(foodPreference.getNoodle()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("면");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //밥 선호도
         if(foodPreference.getRice()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("밥");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //온도 선호도
         if(foodPreference.getTemperature()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByTemperature("HOT");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         else {
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByTemperatureOrTemperature("NORMAL", "COLD");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //한국음식 선호도
         if(foodPreference.getKorea()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(1L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //일국음식 선호도
         if(foodPreference.getJapan()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(2L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //중국음식 선호도
         if(foodPreference.getChina()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(3L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //양식 선호도
         if(foodPreference.getWestern()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCountryIdx(4L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //날것 선호도
         if(foodPreference.getRaw()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("raw");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //익힌거 선호도
         else if(foodPreference.getRoasted()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("roasted");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
         //국물 선호도
         if(foodPreference.getSoup()>=RECOMMEND_SCORE){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("soup");
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempFoodList.contains(idx))
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
                     TempFoodList.add(idx);
             }
         }
@@ -216,103 +207,103 @@ public class RecommendListService {
         //SF 선호도
         if(mediaPreference.getScienceFiction() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(1L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //SF 선호도
         if(mediaPreference.getHorror() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(3L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //드라마 선호도
         if(mediaPreference.getDrama() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(3L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //로맨스 선호도
         if(mediaPreference.getRomance()>= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(6L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //액션 선호도
         if(mediaPreference.getAction() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(15L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //코미디 선호도
         if(mediaPreference.getComedy() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(19L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //범죄 선호도
         if(mediaPreference.getCrime() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdxOrGenreIdx(9L, 12L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //판타지 선호도
         if(mediaPreference.getFantasy() >= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(20L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //애니 선호도
         if(mediaPreference.getAnimation()>= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(14L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //예능 선호도
         if(mediaPreference.getTvShow()>= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(17L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
         //고전 선호도
         if(mediaPreference.getClassic()>= RECOMMEND_SCORE){
             List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdxOrGenreIdx(10L,11L);
-            for(int i = 0; i <res.size(); ++i) {
-                Long idx = res.get(i).getIdx();
-                if(!TempMediaList.contains(idx))
+            for (MediaActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempMediaList.contains(idx))
                     TempMediaList.add(idx);
             }
         }
-//
+
 //        //넷플릭스 선호도
 //        if(mediaPreference.getNetflix()>= RECOMMEND_SCORE){
 //            List<MediaActivity> res = mediaRecommendListRepository.findMediaActivitiesByGenreIdx(3L);
@@ -420,81 +411,81 @@ public class RecommendListService {
         //카페인 선호도
         if(dessertPreference.getCoffee() >= RECOMMEND_SCORE) {
             List<Drink> res = drinkRepository.findDrinksByCaffeine("Y");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
-                }
+            }
         }
         //베이커리 선호도
         if(dessertPreference.getBakery() >= RECOMMEND_SCORE){
             List<NonDrink> res = nonDrinkRepository.findAll();
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (NonDrink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //단거 선호도
         if(dessertPreference.getSweet() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByFlavor("단");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //신거 선호도
         else if(dessertPreference.getSour() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByFlavor("쓴");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //쓴거 선호도
         else if(dessertPreference.getBitter() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByFlavor("신");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //찬거 선호도
         if(dessertPreference.getCold() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByTemperatureContains("ICE");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //뜨거운거 선호도
         else if(dessertPreference.getHot() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByTemperatureContains("HOT");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //스무디 선호도
         if(dessertPreference.getSmoothie() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByDrinkNameContains("스무디");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
         //티 선호도
         if(dessertPreference.getTea() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByDrinkNameContainsOrDrinkNameContains("차", "티");
-            for(int i = 0; i < res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempDessertList.contains(idx))
+            for (Drink re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
         }
@@ -506,35 +497,35 @@ public class RecommendListService {
         //난이도별 선호도
         if(workoutPreference.getDifficulty() >= RECOMMEND_SCORE){
             List<WorkoutActivity> res = workoutRecommendListRepository.findWorkoutActivitiesByDifficultyIdxOrDifficultyIdx(2L, 3L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempWorkoutList.contains(idx))
+            for (WorkoutActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempWorkoutList.contains(idx))
                     TempWorkoutList.add(idx);
             }
         }
         else{
             List<WorkoutActivity> res = workoutRecommendListRepository.findWorkoutActivitiesByDifficultyIdx(1L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempWorkoutList.contains(idx))
+            for (WorkoutActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempWorkoutList.contains(idx))
                     TempWorkoutList.add(idx);
             }
         }
         //요가 선호도
         if(workoutPreference.getHealth() >= RECOMMEND_SCORE){
             List<WorkoutActivity> res = workoutRecommendListRepository.findWorkoutActivitiesByTypeIdx(1L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempWorkoutList.contains(idx))
+            for (WorkoutActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempWorkoutList.contains(idx))
                     TempWorkoutList.add(idx);
             }
         }
         //헬스 선호도
         if(workoutPreference.getHealth() >= RECOMMEND_SCORE){
             List<WorkoutActivity> res = workoutRecommendListRepository.findWorkoutActivitiesByTypeIdx(2L);
-            for(int i = 0; i <res.size(); ++i){
-                Long idx = res.get(i).getIdx();
-                if(!TempWorkoutList.contains(idx))
+            for (WorkoutActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempWorkoutList.contains(idx))
                     TempWorkoutList.add(idx);
             }
         }
@@ -557,18 +548,21 @@ public class RecommendListService {
 
 
         for(int i = 0; i <RECOMMEND_SIZE; ++i){
-            MediaRecommendDto res1 = new MediaRecommendDto(mediaRecommendListRepository.findById(TempMediaList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)), mediaImgRepository.findMediaImgByMediaIdx(TempMediaList.get(i)));
+            MediaRecommendDto res1 = new MediaRecommendDto(mediaRecommendListRepository.findById(TempMediaList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)));
             mediaActivities.add(res1);
-            FoodRecommendDto res2 = new FoodRecommendDto(foodRecommendListRepository.findById(TempFoodList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)), foodImgRepository.findFoodImageByFoodIdx(TempFoodList.get(i)));
+
+            FoodRecommendDto res2 = new FoodRecommendDto(foodRecommendListRepository.findById(TempFoodList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)));
             foodActivities.add(res2);
-            DessertRecommendDto res3 = new DessertRecommendDto(dessertRecommendListRepository.findById(TempDessertList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)), dessertImageRepository.findDessertImageByDessertIdx(TempDessertList.get(i)));
+
+            DessertRecommendDto res3 = new DessertRecommendDto(dessertRecommendListRepository.findById(TempDessertList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)));
             dessertActivities.add(res3);
-            WorkoutRecommendDto res4 = new WorkoutRecommendDto(workoutRecommendListRepository.findById(TempWorkoutList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)), workoutImgRepository.findWorkoutImgByExerciseIdx(TempWorkoutList.get(i)));
+
+            WorkoutRecommendDto res4 = new WorkoutRecommendDto(workoutRecommendListRepository.findById(TempWorkoutList.get(i)).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR)));
             workoutActivities.add(res4);
 
         }
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<>();
 
         map.put("media", mediaActivities);
         map.put("food", foodActivities);

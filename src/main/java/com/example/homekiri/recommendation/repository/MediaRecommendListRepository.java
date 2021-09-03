@@ -1,7 +1,6 @@
 package com.example.homekiri.recommendation.repository;
 
-import com.example.homekiri.recommendation.Dto.activity.MediaActivityResponseDto;
-import com.example.homekiri.recommendation.model.activity.MediaActivity;
+import com.example.homekiri.model.Media.MediaActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

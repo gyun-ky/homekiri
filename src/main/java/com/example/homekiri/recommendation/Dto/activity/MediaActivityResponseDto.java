@@ -1,8 +1,8 @@
 package com.example.homekiri.recommendation.Dto.activity;
 
-import com.example.homekiri.recommendation.model.activity.Info.MediaPlatform;
-import com.example.homekiri.recommendation.model.activity.MediaActivity;
-import com.example.homekiri.recommendation.model.activity.Info.MediaImg;
+import com.example.homekiri.model.Media.MediaPlatform;
+import com.example.homekiri.model.Media.MediaActivity;
+import com.example.homekiri.model.Media.MediaImg;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class MediaActivityResponseDto {
     private String imgUrl;
 
 
-    public MediaActivityResponseDto(MediaActivity entity1, MediaImg entity2, MediaPlatform entity3){
+    public MediaActivityResponseDto(MediaActivity entity1, MediaPlatform entity3){
         this.idx = entity1.getIdx();
         this.genreIdx = GenreIdxToGenre( entity1.getGenreIdx());
         this.mediaName = entity1.getMediaName();
@@ -33,7 +33,7 @@ public class MediaActivityResponseDto {
         this.actorList = CommaParsing(entity1.getActorList());
         this.platforms = DelimParsing(entity3.getPlatformIdx());
         this.description = entity1.getDescription();
-        this.imgUrl = entity2.getImgUrl();
+        this.imgUrl = entity1.getMediaImg().getImgUrl();
     }
 
     public String GenreIdxToGenre(Long genreIdx){
