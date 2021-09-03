@@ -27,7 +27,7 @@ public class TrendListController {
     private final DessertTrendListService dessertTrendListService;
     private final WorkoutTrendListService workoutTrendListService;
 
-    /**
+    /*
      * 미디어 트렌드 리스트 API
      * [GET] /web/dashboard/media-trend-list
      * @return BaseResponse<List<MediaTrendListResponseDto>>
@@ -46,7 +46,7 @@ public class TrendListController {
         }
     }
 
-    /**
+    /*
      * 음식 트렌드 리스트 API
      * [GET] /web/dashboard/food-trend-list
      * @return BaseResponse<List<FoodTrendListResponseDto>>

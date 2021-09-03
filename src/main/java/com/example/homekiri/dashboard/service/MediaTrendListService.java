@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-/**
+/*
  * 미디어 트렌드 Service
  * @param Null
  * @return List<MediaTrendListResponseDto>

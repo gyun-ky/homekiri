@@ -24,7 +24,7 @@ public class MediaTrend {
     private Long idx;
 
     @Column(name = "mediaIdx")
-    private String mediaIdx;
+    private Long mediaIdx;
 
     @Column(name = "mediaName")
     private String mediaName;
@@ -37,4 +37,14 @@ public class MediaTrend {
 
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @Builder
+    public MediaTrend(Long idx, Long mediaIdx, String mediaName, int ranking, LocalDateTime updatedAt, LocalDateTime createdAt){
+        this.idx = idx;
+        this.mediaIdx = mediaIdx;
+        this.mediaName = mediaName;
+        this.ranking = ranking;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+    }
 }

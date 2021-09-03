@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-/**
+/*
  * 운동 트렌드 Service
  * @param Null
  * @return List<WorkoutTrendListResponseDto>

@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-/**
+/*
  * 음식 트렌드 Service
  * @param Null
  * @return List<FoodTrendListResponseDto>
