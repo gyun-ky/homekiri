@@ -1,7 +1,6 @@
 package com.example.homekiri.recommendation.Dto.ActivityRecommendDto;
 
-import com.example.homekiri.model.Food.FoodActivity;
-import com.example.homekiri.model.Food.FoodImage;
+import com.example.homekiri.food.model.FoodActivity;
 import lombok.Getter;
 
 @Getter

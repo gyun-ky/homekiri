@@ -1,6 +1,6 @@
 package com.example.homekiri.recommendation.repository;
 
-import com.example.homekiri.model.Exersice.WorkoutActivity;
+import com.example.homekiri.exercise.model.WorkoutActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package com.example.homekiri.recommendation.Dto.activity;
 
-import com.example.homekiri.model.Media.MediaPlatform;
-import com.example.homekiri.model.Media.MediaActivity;
-import com.example.homekiri.model.Media.MediaImg;
+import com.example.homekiri.media.model.MediaPlatform;
+import com.example.homekiri.media.model.MediaActivity;
 import lombok.Getter;
 
 import java.util.ArrayList;

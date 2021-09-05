@@ -1,6 +1,6 @@
 package com.example.homekiri.recommendation.repository.ActivitySpecifics;
 
-import com.example.homekiri.model.Media.MediaImg;
+import com.example.homekiri.media.model.MediaImg;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
