@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/web/recommendation")
+@RequestMapping("/web/recommendation/details")
 public class SpecificActivityController {
     private final DessertActivityDetailsService dessertActivityDetailsService;
     private final FoodActivityDetailsService foodActivityDetailsService;
     private final MediaActivityDetailsService mediaActivityDetailsService;
     private final WorkoutActivityDetailsService workoutActivityDetailsService;
 
-    /**
+    /*
      * 디저트 상세 설명 API
      * [GET] /web/dessert/{idx}
      * @param Long
@@ -43,7 +43,7 @@ public class SpecificActivityController {
         }
     }
 
-    /**
+    /*
      * 음식 상세 설명 API
      * [GET] /web/food/{idx}
      * @param Long
@@ -61,7 +61,7 @@ public class SpecificActivityController {
         }
     }
 
-    /**
+    /*
      * 미디어 상세 설명 API
      * [GET] /web/media/{idx}
      * @param Long
@@ -79,7 +79,7 @@ public class SpecificActivityController {
         }
     }
 
-    /**
+    /*
      * 운동 상세 설명 API
      * [GET] /web/workout/{idx}
      * @param Long

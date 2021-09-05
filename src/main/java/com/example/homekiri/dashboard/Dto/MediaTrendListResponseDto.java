@@ -7,10 +7,12 @@ import lombok.Getter;
 public class MediaTrendListResponseDto {
 
     private Long idx;
+    private Long mediaIdx;
     private String mediaName;
 
     public MediaTrendListResponseDto(MediaTrend entity){
         this.idx = entity.getIdx();
+        this.mediaIdx = entity.getMediaIdx();
         this.mediaName = entity.getMediaName();
     }
 }

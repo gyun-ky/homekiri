@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "DessertTrend")
-public class DessertTrend {
+public class  DessertTrend {
     @Id
     @Column(name = "idx")
     private Long idx;

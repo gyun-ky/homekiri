@@ -1,9 +1,7 @@
 package com.example.homekiri.recommendation.Dto.preference;
 
-import com.example.homekiri.recommendation.model.preferences.WorkoutPreference;
+import com.example.homekiri.model.preferences.WorkoutPreference;
 import lombok.Getter;
-
-import javax.persistence.Column;
 
 @Getter
 public class WorkoutPreferenceDto {

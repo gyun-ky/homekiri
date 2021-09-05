@@ -1,9 +1,7 @@
 package com.example.homekiri.recommendation.Dto.preference;
 
-import com.example.homekiri.recommendation.model.preferences.MediaPreference;
+import com.example.homekiri.model.preferences.MediaPreference;
 import lombok.Getter;
-
-import javax.persistence.Column;
 
 @Getter
 public class MediaPreferenceDto {

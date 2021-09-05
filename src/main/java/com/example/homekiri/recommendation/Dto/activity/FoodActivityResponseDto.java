@@ -1,7 +1,7 @@
 package com.example.homekiri.recommendation.Dto.activity;
 
-import com.example.homekiri.recommendation.model.activity.FoodActivity;
-import com.example.homekiri.recommendation.model.activity.Info.FoodImage;
+import com.example.homekiri.model.Food.FoodActivity;
+import com.example.homekiri.model.Food.FoodImage;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class FoodActivityResponseDto {
     private String cookingState;
     private String imgUrl;
 
-    public FoodActivityResponseDto(FoodActivity entity, FoodImage entity2){
+    public FoodActivityResponseDto(FoodActivity entity){
         this.idx = entity.getIdx();
         this.country = CountryIdxToString(entity.getCountryIdx());
         this.foodName = entity.getFoodName();
@@ -30,7 +30,7 @@ public class FoodActivityResponseDto {
         this.recipe = Parsing(entity.getRecipe());
         this.temperature = entity.getTemperature();
         this.cookingState = entity.getCookingState();
-        this.imgUrl = entity2.getImgUrl();
+        this.imgUrl = entity.getFoodImage().getImgUrl();
     }
 
     //recipe parsing by "delim"
