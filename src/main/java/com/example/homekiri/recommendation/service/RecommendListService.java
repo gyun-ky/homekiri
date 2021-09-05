@@ -4,10 +4,11 @@ import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.dessert.model.Drink;
 import com.example.homekiri.dessert.model.NonDrink;
-import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.DessertRecommendDto;
-import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.FoodRecommendDto;
-import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.MediaRecommendDto;
-import com.example.homekiri.recommendation.Dto.ActivityRecommendDto.WorkoutRecommendDto;
+import com.example.homekiri.dessert.repository.DrinkRepository;
+import com.example.homekiri.recommendation.Dto.DessertRecommendDto;
+import com.example.homekiri.recommendation.Dto.FoodRecommendDto;
+import com.example.homekiri.recommendation.Dto.MediaRecommendDto;
+import com.example.homekiri.recommendation.Dto.WorkoutRecommendDto;
 import com.example.homekiri.food.model.FoodActivity;
 import com.example.homekiri.media.model.MediaActivity;
 import com.example.homekiri.exercise.model.WorkoutActivity;
@@ -15,16 +16,15 @@ import com.example.homekiri.preferences.DessertPreference;
 import com.example.homekiri.preferences.FoodPreference;
 import com.example.homekiri.preferences.MediaPreference;
 import com.example.homekiri.preferences.WorkoutPreference;
-import com.example.homekiri.recommendation.repository.ActivitySpecifics.*;
-import com.example.homekiri.recommendation.repository.DessertRecommendListRepository;
-import com.example.homekiri.recommendation.repository.FoodRecommendListRepository;
-import com.example.homekiri.recommendation.repository.MediaRecommendListRepository;
-import com.example.homekiri.recommendation.repository.WorkoutRecommendListRepository;
+import com.example.homekiri.dessert.repository.DessertRecommendListRepository;
+import com.example.homekiri.food.repository.FoodRecommendListRepository;
+import com.example.homekiri.media.repository.MediaRecommendListRepository;
+import com.example.homekiri.exercise.repository.WorkoutRecommendListRepository;
 
-import com.example.homekiri.recommendation.repository.preference.DessertPreferenceRepository;
-import com.example.homekiri.recommendation.repository.preference.FoodPreferenceRepository;
-import com.example.homekiri.recommendation.repository.preference.MediaPreferenceRepository;
-import com.example.homekiri.recommendation.repository.preference.WorkoutPreferenceRepository;
+import com.example.homekiri.dessert.repository.DessertPreferenceRepository;
+import com.example.homekiri.food.repository.FoodPreferenceRepository;
+import com.example.homekiri.media.repository.MediaPreferenceRepository;
+import com.example.homekiri.exercise.repository.WorkoutPreferenceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class RecommendListService {
 
     //Activity Info
     private final DrinkRepository drinkRepository;
-    private final nonDrinkRepository nonDrinkRepository;
+    private final com.example.homekiri.dessert.repository.nonDrinkRepository nonDrinkRepository;
 
 
     //Activity Repo
