@@ -1,6 +1,6 @@
 package com.example.homekiri.recommendation.Dto.preference;
 
-import com.example.homekiri.model.preferences.MediaPreference;
+import com.example.homekiri.preferences.MediaPreference;
 import lombok.Getter;
 
 @Getter
