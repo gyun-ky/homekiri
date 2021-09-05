@@ -1,7 +1,7 @@
 package com.example.homekiri.recommendation.repository;
 
 
-import com.example.homekiri.model.Food.FoodActivity;
+import com.example.homekiri.food.model.FoodActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

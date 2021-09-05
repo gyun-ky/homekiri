@@ -1,7 +1,6 @@
 package com.example.homekiri.recommendation.Dto.ActivityRecommendDto;
 
-import com.example.homekiri.model.Exersice.WorkoutImg;
-import com.example.homekiri.model.Exersice.WorkoutActivity;
+import com.example.homekiri.exercise.model.WorkoutActivity;
 import lombok.Getter;
 
 @Getter
