@@ -471,6 +471,7 @@ public class RecommendListService {
                     TempDessertList.add(idx);
             }
         }
+        
         //스무디 선호도
         if(dessertPreference.getSmoothie() >= RECOMMEND_SCORE){
             List<Drink> res = drinkRepository.findDrinksByDrinkNameContains("스무디");
@@ -568,7 +569,6 @@ public class RecommendListService {
         map.put("food", foodActivities);
         map.put("dessert", dessertActivities);
         map.put("workout", workoutActivities);
-
 
 
         return map;
