@@ -25,6 +25,7 @@ import com.example.homekiri.dessert.repository.DessertPreferenceRepository;
 import com.example.homekiri.food.repository.FoodPreferenceRepository;
 import com.example.homekiri.media.repository.MediaPreferenceRepository;
 import com.example.homekiri.exercise.repository.WorkoutPreferenceRepository;
+import com.example.homekiri.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Service
 public class RecommendListService {
+
     //Preference Repo
     private final DessertPreferenceRepository dessertPreferenceRepository;
     private final FoodPreferenceRepository foodPreferenceRepository;
@@ -54,12 +56,13 @@ public class RecommendListService {
 
 
     @Transactional
-    public HashMap<String, Object> recommend(Long UserIdx) throws BaseException {
-        //UserIdx Preference
-        DessertPreference dessertPreference = dessertPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_USER_IDX));
-        FoodPreference foodPreference = foodPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_USER_IDX));
-        MediaPreference mediaPreference = mediaPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_USER_IDX));
-        WorkoutPreference workoutPreference = workoutPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_USER_IDX));
+    public HashMap<String, Object> recommend(Long UserIdx, Long RECOMMEND_SIZE) throws BaseException {
+
+        //User Preference
+        DessertPreference dessertPreference = dessertPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_PREFERENCE));
+        FoodPreference foodPreference = foodPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_PREFERENCE));
+        MediaPreference mediaPreference = mediaPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_PREFERENCE));
+        WorkoutPreference workoutPreference = workoutPreferenceRepository.findById(UserIdx).orElseThrow(()->new BaseException(BaseResponseStatus.INVALID_PREFERENCE));
 
 
         List<Long> TempMediaList = new ArrayList<>();
@@ -67,7 +70,6 @@ public class RecommendListService {
         List<Long> TempDessertList = new ArrayList<>();
         List<Long> TempWorkoutList = new ArrayList<>();
 
-        int RECOMMEND_SIZE = 8;
         int RECOMMEND_SCORE = 70;
 
         /*

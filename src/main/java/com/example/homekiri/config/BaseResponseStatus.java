@@ -43,7 +43,8 @@ public enum BaseResponseStatus {
     NO_TREND_LIST_ERROR(false, "트렌드 데이터가 없습니다."),
     ACTIVITY_IDX_ERROR(false, "존재하지 않는 엑티비티입니다."),
     INVALID_USER_IDX(false, "존재하지 않는 User입니다."),
-    PREFERENCE_LACK_ERROR(false, "선호도 데이터가 부족합니다."),
+    INVALID_PREFERENCE(false, "사용자 선호도가 없습니다."),
+    PREFERENCE_LACK_ERROR(false, "사용자 선호도 데이터가 부족합니다."),
     MEDIA_DATA_LACK_ERROR(false, "해당 미디어는 개봉 전이거나 데이터가 충분하지 않습니다.");
 
     private final boolean isSuccess;
