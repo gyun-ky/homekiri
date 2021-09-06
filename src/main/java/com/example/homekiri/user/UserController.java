@@ -96,8 +96,13 @@ public class UserController {
             return new BaseResponse<>(e.getStatus());
         }
 
-        GetMypageRes result = new GetMypageRes("tmp", "tmp");
-        return new BaseResponse<>(result);
+
+        try {
+            GetMypageRes result = userService.getMypageInfo(userIdx);
+            return new BaseResponse<>(result);
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
 
     }
 

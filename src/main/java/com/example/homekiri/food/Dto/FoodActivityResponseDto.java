@@ -22,7 +22,7 @@ public class FoodActivityResponseDto {
 
     public FoodActivityResponseDto(FoodActivity entity){
         this.idx = entity.getIdx();
-        this.country = CountryIdxToString(entity.getCountryIdx());
+        this.country = CountryIdxToString(entity.getCountry().getIdx());
         this.foodName = entity.getFoodName();
         this.description = entity.getDescription();
         this.ingredient = entity.getIngredient();

@@ -5,11 +5,13 @@ import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.config.secret.Secret;
 import com.example.homekiri.library.AES128;
 import com.example.homekiri.library.JwtService;
+import com.example.homekiri.like.dto.LikeFoodDto;
+import com.example.homekiri.like.repository.LikeRepository;
+import com.example.homekiri.user.dto.GetMypageRes;
 import com.example.homekiri.user.dto.PostLogInRes;
 import com.example.homekiri.user.model.User;
 import com.example.homekiri.user.repository.UserRepository;
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +23,13 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final LikeRepository likeRepository;
     private final JwtService jwtService;
 
     @Autowired
-    public UserService(UserRepository userRepository, JwtService jwtService) {
+    public UserService(UserRepository userRepository, LikeRepository likeRepository, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.likeRepository = likeRepository;
         this.jwtService = jwtService;
     }
 
@@ -121,5 +125,17 @@ public class UserService {
      @param String email String password
      @return PostLogInRes
      */
+    public GetMypageRes getMypageInfo(Long userIdx) throws BaseException{
+        User user = null;
+        List<LikeFoodDto> likeFoodDtos = null;
+        try{
+        user = userRepository.findUserByIdx(userIdx);
+        likeFoodDtos = likeRepository.findLikeFoodByUserIdx(userIdx);
+        }catch (Exception e){
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+
+        return new GetMypageRes(user.getNickName(), user.getProfileImg(), likeFoodDtos);
+    }
 
 }
