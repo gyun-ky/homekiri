@@ -1,8 +1,6 @@
 package com.example.homekiri.dashboard.service;
 
 import com.example.homekiri.config.BaseException;
-import com.example.homekiri.config.BaseResponse;
-import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.dashboard.Dto.MediaTrendListResponseDto;
 import com.example.homekiri.dashboard.repository.MediaTrendListRepository;
 import lombok.RequiredArgsConstructor;

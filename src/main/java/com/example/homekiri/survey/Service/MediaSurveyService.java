@@ -2,8 +2,6 @@ package com.example.homekiri.survey.Service;
 
 
 import com.example.homekiri.config.BaseException;
-import com.example.homekiri.config.BaseResponseStatus;
-import com.example.homekiri.survey.Dto.FoodRequestDto;
 import com.example.homekiri.survey.Dto.MediaRequestDto;
 import com.example.homekiri.survey.Repository.MediaSurveyRepository;
 import com.example.homekiri.survey.model.MediaSurvey;
