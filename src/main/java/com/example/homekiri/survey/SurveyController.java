@@ -42,4 +42,23 @@ public class SurveyController {
         }
     }
 
+    @PostMapping("/{userIdx}/media")
+    public BaseResponse<MediaResponseDto> saveMediaResult(@RequestBody MediaRequestDto mediaRequestDto, @PathVariable Long userIdx) {
+        try {
+            Long result = mediaSurveyService.updateMediaSurvey(mediaRequestDto, userIdx);
+            return new BaseResponse(result);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    @PostMapping("/{userIdx}/exercise")
+    public BaseResponse<ExerciseResponseDto> saveExerciseResult(@RequestBody ExerciseRequestDto exerciseRequestDto, @PathVariable Long userIdx) {
+        try {
+            Long result = exerciseSurveyService.updateExerciseSurvey(exerciseRequestDto, userIdx);
+            return new BaseResponse(result);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
 }
