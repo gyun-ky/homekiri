@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class Drink {
     @Id
     @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
     @Column(name = "drinkName")

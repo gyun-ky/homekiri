@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class MediaImage {
     @Id
     @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
     @ManyToOne(fetch = FetchType.LAZY)

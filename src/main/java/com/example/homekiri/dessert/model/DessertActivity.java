@@ -17,6 +17,7 @@ public class DessertActivity {
 
     @Id
     @Column(name="idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
     @Column(name="drinkIdx")
@@ -24,6 +25,7 @@ public class DessertActivity {
 
     @Column(name="nonDrinkIdx")
     private Long nonDrinkIdx;
+
 
     @Column(name="dessertName")
     private String dessertName;

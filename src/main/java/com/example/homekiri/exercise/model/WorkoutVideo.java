@@ -16,21 +16,18 @@ import java.time.LocalDateTime;
 public class WorkoutVideo {
     @Id
     @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(name = "exerciseIdx")
-    private Long exerciseIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exerciseIdx")
+    private WorkoutActivity workoutActivity;
 
     @Column(name = "videoUrl")
     private String videoUrl;
 
     @Column(name = "description")
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private WorkoutActivity workoutActivity;
-
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -40,12 +37,4 @@ public class WorkoutVideo {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    public WorkoutVideo(Long idx, Long exerciseIdx, String videoUrl, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
-        this.idx = idx;
-        this.exerciseIdx = exerciseIdx;
-        this.videoUrl = videoUrl;
-        this.description = description;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
-    }
 }

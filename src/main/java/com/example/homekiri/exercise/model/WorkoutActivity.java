@@ -18,16 +18,20 @@ import java.util.List;
 public class WorkoutActivity {
     @Id
     @Column(name="idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(name="typeIdx")
-    private Long typeIdx;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "typeIdx")
+    private Type type;
 
-    @Column(name="difficultyIdx")
-    private Long difficultyIdx;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "difficultyIdx")
+    private Difficulty difficulty;
 
-    @Column(name="targetIdx")
-    private Long targetIdx;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "targetIdx")
+    private Target target;
 
     @Column(name="exerciseName")
     private String exerciseName;
@@ -35,28 +39,27 @@ public class WorkoutActivity {
     @Column(name="description")
     private String description;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workoutActivity", cascade = CascadeType.ALL)
+    private List<WorkoutImg> workoutImgList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "workoutActivity")
-    private List<WorkoutImg> workoutImgs = new ArrayList<>();
-
-    @OneToMany(mappedBy = "workoutActivity")
-    private List<WorkoutVideo> workoutVideos = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workoutActivity", cascade = CascadeType.ALL)
+    private List<WorkoutVideo> workoutVideoList = new ArrayList<>();
 
     @Column(name="createdAt")
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @Column(name="updatedAt")
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     @Builder
-    public WorkoutActivity(Long idx, Long typeIdx, Long difficultyIdx, Long targetIdx, String exerciseName, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public WorkoutActivity(Long idx, Type type, Difficulty difficulty, Target target, String exerciseName, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
         this.idx = idx;
-        this.typeIdx = typeIdx;
-        this.difficultyIdx = difficultyIdx;
-        this.targetIdx  =targetIdx;
+        this.type = type;
+        this.difficulty = difficulty;
+        this.target  =target;
         this.exerciseName = exerciseName;
         this.description = description;
         this.updatedAt = updatedAt;

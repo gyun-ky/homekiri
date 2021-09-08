@@ -17,11 +17,11 @@ import java.time.LocalDateTime;
 public class MediaSurvey {
     @Id
     @Column(name = "idx")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @OneToOne(mappedBy = "user")
-    @Column(name = "userIdx")
+    @OneToOne
+    @JoinColumn(name = "userIdx")
     private User user;
 
     private int animation;

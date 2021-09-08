@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class FoodPreference {
     @Id
     @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
     @Column(name = "userIdx")

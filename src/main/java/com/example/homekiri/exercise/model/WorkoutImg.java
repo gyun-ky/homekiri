@@ -16,10 +16,12 @@ import java.time.LocalDateTime;
 public class WorkoutImg {
     @Id
     @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(name = "exerciseIdx")
-    private Long exerciseIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exerciseIdx")
+    private WorkoutActivity workoutActivity;
 
     @Column(name = "imgUrl")
     private String imgUrl;
@@ -27,9 +29,6 @@ public class WorkoutImg {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private WorkoutActivity workoutActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -39,13 +38,13 @@ public class WorkoutImg {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Builder
-    public WorkoutImg(Long idx, Long exerciseIdx, String imgUrl, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
-        this.idx = idx;
-        this.exerciseIdx = exerciseIdx;
-        this.imgUrl = imgUrl;
-        this.description = description;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+//    @Builder
+//    public WorkoutImg(Long idx, Long exerciseIdx, String imgUrl, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
+//        this.idx = idx;
+//        this.exerciseIdx = exerciseIdx;
+//        this.imgUrl = imgUrl;
+//        this.description = description;
+//        this.createdAt = createdAt;
+//        this.updatedAt = updatedAt;
+//    }
 }
