@@ -12,9 +12,9 @@ public class MediaRecommendDto {
 
     public MediaRecommendDto(MediaActivity entity1){
         this.idx = entity1.getIdx();
-        this.category = GenreIdxToGenre( entity1.getGenreIdx());
+        this.category = GenreIdxToGenre( entity1.getGenre().getIdx());
         this.mediaName = entity1.getMediaName();
-        this.imgUrl = entity1.getMediaImg().getImgUrl();
+        this.imgUrl = entity1.getMediaImages().get(0).getImgUrl();
     }
     public String GenreIdxToGenre(Long genreIdx){
         if(genreIdx == 1) return "SF";
