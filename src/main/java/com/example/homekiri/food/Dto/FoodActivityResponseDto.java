@@ -29,7 +29,7 @@ public class FoodActivityResponseDto {
         this.recipe = Parsing(entity.getRecipe());
         this.temperature = entity.getTemperature();
         this.cookingState = entity.getCookingState();
-        this.imgUrl = entity.getFoodImage().getImgUrl();
+        this.imgUrl = entity.getFoodImages().get(0).getImgUrl();
     }
 
     //recipe parsing by "delim"

@@ -46,9 +46,9 @@ public class FoodActivity {
     @Column(name="cookingState")
     private String cookingState;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx", updatable = false, insertable = false)
-    private FoodImage foodImage;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "idx", updatable = false, insertable = false)
+//    private FoodImage foodImage;
 
     @Column(name="updatedAt")
     @LastModifiedDate

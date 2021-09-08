@@ -1,5 +1,8 @@
 package com.example.homekiri.like.repository;
 
+import com.example.homekiri.food.model.Country;
+import com.example.homekiri.food.model.FoodActivity;
+import com.example.homekiri.food.model.FoodImage;
 import com.example.homekiri.like.dto.LikeFoodDto;
 import com.example.homekiri.like.model.LikeFood;
 import org.springframework.stereotype.Repository;
@@ -27,13 +30,17 @@ public class LikeRepository {
      @return List<LikeFoodDto>
      */
     public List<LikeFoodDto> findLikeFoodByUserIdx(Long userIdx){
-        List<Object[]> queryResult = em.createQuery("SELECT l.food.idx, l.food.foodName, l.food.country.countryName, MAX(l.food.foodImages) FROM LikeFood l WHERE l.user.idx = :userIdx order by l.createdAt DESC")
+        List<Object[]> queryResult = em.createQuery("SELECT f, c FROM LikeFood l JOIN l.user u Join l.food f JOIN f.country c WHERE u.idx = :userIdx order by l.createdAt DESC")
                 .setParameter("userIdx", userIdx).getResultList();
+
+        System.out.println("[REPO] findLikeFoodByUserIdx queryResult complete");
 
         List<LikeFoodDto> result = new ArrayList<>();
         for(Object[] row : queryResult){
-            result.add(new LikeFoodDto((Long)row[0], (String)row[1], (String)row[2], (String)row[3]));
+            result.add(new LikeFoodDto((FoodActivity) row[0], (Country)row[1]));
         }
+
+        System.out.println("[REPO] findLikeFoodByUserIdx LikeFoodDto convert complete");
         return result;
     }
 }

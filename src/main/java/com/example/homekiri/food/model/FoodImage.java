@@ -30,8 +30,8 @@ public class FoodImage {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "foodImage")
-    private FoodActivity foodActivity;
+//    @OneToOne(mappedBy = "foodImage")
+//    private FoodActivity foodActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate

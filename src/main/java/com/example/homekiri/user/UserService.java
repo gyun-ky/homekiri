@@ -8,6 +8,7 @@ import com.example.homekiri.library.JwtService;
 import com.example.homekiri.like.dto.LikeFoodDto;
 import com.example.homekiri.like.repository.LikeRepository;
 import com.example.homekiri.user.dto.GetMypageRes;
+import com.example.homekiri.user.dto.MypageLikeFood;
 import com.example.homekiri.user.dto.PostLogInRes;
 import com.example.homekiri.user.model.User;
 import com.example.homekiri.user.repository.UserRepository;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -128,14 +130,18 @@ public class UserService {
     public GetMypageRes getMypageInfo(Long userIdx) throws BaseException{
         User user = null;
         List<LikeFoodDto> likeFoodDtos = null;
+        List<MypageLikeFood> mypageLikeFoods = new ArrayList<>();
         try{
         user = userRepository.findUserByIdx(userIdx);
         likeFoodDtos = likeRepository.findLikeFoodByUserIdx(userIdx);
+        for(LikeFoodDto lf : likeFoodDtos){
+            mypageLikeFoods.add(new MypageLikeFood(lf));
+        }
         }catch (Exception e){
             throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
         }
 
-        return new GetMypageRes(user.getNickName(), user.getProfileImg(), likeFoodDtos);
+        return new GetMypageRes(user.getNickName(), user.getProfileImg(), mypageLikeFoods);
     }
 
 }
