@@ -25,7 +25,10 @@ public class UserRepository{
     }
 
     public User findUserByIdx(Long userIdx){
-        return em.find(User.class, userIdx);
+
+        User result = em.find(User.class, userIdx);
+        System.out.println("[REPO] findUserByIdx complete");
+        return result;
     }
 
     public User findSingleUserByEmail(String email){

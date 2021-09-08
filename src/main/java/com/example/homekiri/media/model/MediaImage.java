@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name="MediaImage")
 @Entity
-public class MediaImg {
+public class MediaImage {
     @Id
     @Column(name = "idx")
-    private Long Idx;
+    private Long idx;
 
-    @Column(name = "mediaIdx")
-    private Long mediaIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mediaIdx")
+    private MediaActivity media;
 
     @Column(name = "description")
     private String description;
@@ -27,8 +28,8 @@ public class MediaImg {
     @Column(name = "imgUrl")
     private String imgUrl;
 
-    @OneToOne(mappedBy = "mediaImg")
-    private MediaActivity mediaActivity;
+//    @OneToOne(mappedBy = "mediaImg")
+//    private MediaActivity mediaActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -39,9 +40,9 @@ public class MediaImg {
     private LocalDateTime createdAt;
 
     @Builder
-    public MediaImg(Long idx, Long mediaIdx, String description, String imgUrl, LocalDateTime updatedAt, LocalDateTime createdAt){
-        this.Idx = idx;
-        this.mediaIdx = mediaIdx;
+    public MediaImage(Long idx, MediaActivity media, String description, String imgUrl, LocalDateTime updatedAt, LocalDateTime createdAt){
+        this.idx = idx;
+        this.media = media;
         this.description = description;
         this.imgUrl = imgUrl;
         this.updatedAt = updatedAt;

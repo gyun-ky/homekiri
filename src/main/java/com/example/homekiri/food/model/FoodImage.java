@@ -1,5 +1,6 @@
 package com.example.homekiri.food.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="FoodImage")
 @Entity
 public class FoodImage {
@@ -18,8 +20,9 @@ public class FoodImage {
     @Column(name = "idx")
     private Long idx;
 
-    @Column(name = "foodIdx")
-    private Long foodIdx;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "foodIdx")
+    private FoodActivity food;
 
     @Column(name = "imgUrl")
     private String imgUrl;
@@ -27,8 +30,8 @@ public class FoodImage {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "foodImage")
-    private FoodActivity foodActivity;
+//    @OneToOne(mappedBy = "foodImage")
+//    private FoodActivity foodActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -38,14 +41,5 @@ public class FoodImage {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Builder
-    public FoodImage(Long idx, Long foodIdx, String imgUrl, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
-        this.idx = idx;
-        this.foodIdx = foodIdx;
-        this.imgUrl = imgUrl;
-        this.description = description;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
-    }
 
 }
