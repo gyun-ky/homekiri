@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -29,8 +30,8 @@ public class NonDrink {
     @Column(name = "flavor")
     private String flavor;
 
-    @OneToOne(mappedBy = "nonDrink")
-    private DessertActivity dessertActivity;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nonDrink")
+    private List<DessertActivity> dessertActivityList;
 
     @Column(name="updatedAt")
     @LastModifiedDate
