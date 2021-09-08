@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.Media;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,18 +16,17 @@ import java.time.LocalDateTime;
 @Entity
 public class MediaPlatform {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="idx")
     private Long idx;
 
-    @Column(name = "mediaIdx")
-    private Long mediaIdx;
-
-    @Column(name = "platformIdx")
-    private String platformIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mediaIdx")
+    private MediaActivity media;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx", insertable = false, updatable = false)
-    private MediaActivity mediaActivity;
+    @JoinColumn(name = "platformIdx")
+    private Platform platform;
 
 
     @Column(name="updatedAt")
@@ -39,10 +39,10 @@ public class MediaPlatform {
     private LocalDateTime createdAt;
 
     @Builder
-    public MediaPlatform(Long idx, Long mediaIdx, String platformIdx , LocalDateTime updatedAt, LocalDateTime createdAt){
+    public MediaPlatform(Long idx, MediaActivity media, Platform platform , LocalDateTime updatedAt, LocalDateTime createdAt){
         this.idx = idx;
-        this.mediaIdx = mediaIdx;
-        this.platformIdx = platformIdx;
+        this.media = media;
+        this.platform = platform;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

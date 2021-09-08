@@ -8,6 +8,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -15,11 +17,16 @@ import java.time.LocalDateTime;
 @Entity
 public class FoodActivity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
     private Long idx;
 
-    @Column(name="countryIdx")
-    private Long countryIdx;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "countryIdx")
+    private Country country;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "food", cascade = CascadeType.ALL)
+    private List<FoodImage> foodImages = new ArrayList<>();
 
     @Column(name="foodName")
     private String foodName;
@@ -39,9 +46,9 @@ public class FoodActivity {
     @Column(name="cookingState")
     private String cookingState;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx", updatable = false, insertable = false)
-    private FoodImage foodImage;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "idx", updatable = false, insertable = false)
+//    private FoodImage foodImage;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -52,9 +59,9 @@ public class FoodActivity {
     private LocalDateTime createdAt;
 
     @Builder
-    public FoodActivity(Long idx, Long countryIdx, String foodName, String description , String ingredient, String recipe, String temperature, String cookingState, LocalDateTime updatedAt,LocalDateTime createdAt ){
+    public FoodActivity(Long idx, Country country, String foodName, String description , String ingredient, String recipe, String temperature, String cookingState, LocalDateTime updatedAt,LocalDateTime createdAt ){
         this.idx = idx;
-        this.countryIdx = countryIdx;
+        this.country = country;
         this.foodName = foodName;
         this.description = description;
         this.ingredient = ingredient;

@@ -17,11 +17,13 @@ import java.util.List;
 @Entity
 public class MediaActivity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
     private Long idx;
 
-    @Column(name="genreIdx")
-    private Long genreIdx;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="genreIdx")
+    private Genre genre;
 
     @Column(name="mediaName")
     private String mediaName;
@@ -30,7 +32,7 @@ public class MediaActivity {
     private String description;
 
     @Column(name="screeningYear")
-    private Long screeningYear;
+    private int screeningYear;
 
     @Column(name="country")
     private String country;
@@ -38,11 +40,10 @@ public class MediaActivity {
     @Column(name="actorList")
     private String actorList;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idx", updatable = false, insertable = false)
-    private MediaImg  mediaImg;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
+    private List<MediaImage> mediaImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "mediaActivity")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     private List<MediaPlatform> mediaPlatformList = new ArrayList<>();
 
     @Column(name="updatedAt")
@@ -54,10 +55,11 @@ public class MediaActivity {
     private LocalDateTime createdAt;
 
     @Builder
-    public MediaActivity(Long idx, Long genreIdx, String mediaName, Long screeningYear, String country, String actorList, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public MediaActivity(Long idx, Genre genre, String mediaName, String description, int screeningYear, String country, String actorList, LocalDateTime updatedAt, LocalDateTime createdAt){
         this.idx = idx;
-        this.genreIdx = genreIdx;
+        this.genre = genre;
         this.mediaName = mediaName;
+        this.description = description;
         this.screeningYear =screeningYear;
         this.country = country;
         this.actorList = actorList;
