@@ -1,24 +1,26 @@
 package com.example.homekiri.recommendation.Dto;
 
 import com.example.homekiri.exercise.model.WorkoutActivity;
+import com.example.homekiri.exercise.model.WorkoutImg;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class WorkoutRecommendDto {
     private Long idx;
     private String type;
     private String exerciseName;
-    private String imgUrl;
+    private List<String> imgUrl;
 
     public WorkoutRecommendDto(WorkoutActivity entity){
         this.idx = entity.getIdx();
-        this.type = TypeIdxToType(entity.getTypeIdx());
+        this.type = entity.getType().getTypeName();
         this.exerciseName = entity.getExerciseName();
-        this.imgUrl = entity.getWorkoutImg().getImgUrl();
+        this.imgUrl = new ArrayList<>();
+        for(WorkoutImg url : entity.getWorkoutImgList())
+            imgUrl.add(url.getImgUrl());
     }
-    public String TypeIdxToType(Long typeIdx){
-        if(typeIdx == 1) return "요가";
-        else if(typeIdx == 2) return "헬스";
-        else return "기타";
-    }
+
 }

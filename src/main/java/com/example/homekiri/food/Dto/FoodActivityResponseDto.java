@@ -22,14 +22,14 @@ public class FoodActivityResponseDto {
 
     public FoodActivityResponseDto(FoodActivity entity){
         this.idx = entity.getIdx();
-        this.country = CountryIdxToString(entity.getCountryIdx());
+        this.country = CountryIdxToString(entity.getCountry().getIdx());
         this.foodName = entity.getFoodName();
         this.description = entity.getDescription();
         this.ingredient = entity.getIngredient();
         this.recipe = Parsing(entity.getRecipe());
         this.temperature = entity.getTemperature();
         this.cookingState = entity.getCookingState();
-        this.imgUrl = entity.getFoodImage().getImgUrl();
+        this.imgUrl = entity.getFoodImages().get(0).getImgUrl();
     }
 
     //recipe parsing by "delim"

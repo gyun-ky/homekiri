@@ -17,6 +17,7 @@ public class DessertImage {
 
     @Id
     @Column(name ="idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
     @Column(name = "dessertIdx")

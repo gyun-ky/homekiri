@@ -15,7 +15,7 @@ public class MediaActivityResponseDto {
     private Long idx;
     private String genreIdx;
     private String mediaName;
-    private Long screeningYear;
+    private int screeningYear;
     private String country;
     private List<String> actorList;
     private List<String> platforms;
@@ -25,14 +25,15 @@ public class MediaActivityResponseDto {
 
     public MediaActivityResponseDto(MediaActivity entity1, MediaPlatform entity3){
         this.idx = entity1.getIdx();
-        this.genreIdx = GenreIdxToGenre( entity1.getGenreIdx());
+        this.genreIdx = GenreIdxToGenre( entity1.getGenre().getIdx());
         this.mediaName = entity1.getMediaName();
         this.screeningYear = entity1.getScreeningYear();
         this.country = entity1.getCountry();
         this.actorList = CommaParsing(entity1.getActorList());
-        this.platforms = DelimParsing(entity3.getPlatformIdx());
+//        this.platforms = DelimParsing(entity3.getPlatformIdx());
+        this.platforms = new ArrayList<String>();  //임시
         this.description = entity1.getDescription();
-        this.imgUrl = entity1.getMediaImg().getImgUrl();
+        this.imgUrl = entity1.getMediaImages().get(0).getImgUrl();
     }
 
     public String GenreIdxToGenre(Long genreIdx){

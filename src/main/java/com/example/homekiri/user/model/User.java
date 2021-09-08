@@ -1,5 +1,9 @@
 package com.example.homekiri.user.model;
 
+import com.example.homekiri.survey.model.DessertSurvey;
+import com.example.homekiri.survey.model.ExerciseSurvey;
+import com.example.homekiri.survey.model.FoodSurvey;
+import com.example.homekiri.survey.model.MediaSurvey;
 import com.example.homekiri.user.dto.PostSignInReq;
 import lombok.AllArgsConstructor;
 import lombok.Generated;
@@ -31,6 +35,18 @@ public class User {
     private String profileImg = null;
 
     private String nickName;
+
+    @OneToOne(mappedBy = "user")
+    private DessertSurvey dessertSurvey;
+
+    @OneToOne(mappedBy = "user")
+    private ExerciseSurvey exerciseSurvey;
+
+    @OneToOne(mappedBy = "user")
+    private FoodSurvey foodSurvey;
+
+    @OneToOne(mappedBy = "user")
+    private MediaSurvey mediaSurvey;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;

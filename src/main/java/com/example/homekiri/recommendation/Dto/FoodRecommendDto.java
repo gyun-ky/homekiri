@@ -13,9 +13,9 @@ public class FoodRecommendDto {
 
     public FoodRecommendDto(FoodActivity entity){
         this.idx = entity.getIdx();
-        this.category = CountryIdxToString(entity.getCountryIdx());
+        this.category = CountryIdxToString(entity.getCountry().getIdx());
         this.foodName = entity.getFoodName();
-        this.imgUrl = entity.getFoodImage().getImgUrl();
+        this.imgUrl = entity.getFoodImages().get(0).getImgUrl();
     }
 
 
