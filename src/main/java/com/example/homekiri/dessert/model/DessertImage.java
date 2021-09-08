@@ -20,17 +20,15 @@ public class DessertImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(name = "dessertIdx")
-    private Long dessertIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dessertIdx")
+    private DessertActivity dessertActivity;
 
     @Column(name = "imgUrl")
     private String imgUrl;
 
     @Column(name = "description")
     private String description;
-
-    @OneToOne(mappedBy = "dessertImage")
-    private DessertActivity dessertActivity;
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -41,9 +39,8 @@ public class DessertImage {
     private LocalDateTime createdAt;
 
     @Builder
-    public DessertImage(Long idx, Long dessertIdx, String description, String imgUrl, LocalDateTime createdAt, LocalDateTime updatedAt){
+    public DessertImage(Long idx, String description, String imgUrl, LocalDateTime createdAt, LocalDateTime updatedAt){
         this.idx = idx;
-        this.dessertIdx = dessertIdx;
         this.imgUrl =  imgUrl;
         this.description = description;
         this.createdAt = createdAt;

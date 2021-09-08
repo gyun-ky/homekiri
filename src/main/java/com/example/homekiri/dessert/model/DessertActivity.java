@@ -1,5 +1,6 @@
 package com.example.homekiri.dessert.model;
 
+import com.example.homekiri.exercise.model.WorkoutImg;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -20,12 +23,13 @@ public class DessertActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column(name="drinkIdx")
-    private Long drinkIdx;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="drinkIdx", nullable = true)
+    private Drink drink;
 
-    @Column(name="nonDrinkIdx")
-    private Long nonDrinkIdx;
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="nonDrinkIdx", nullable = true)
+    private NonDrink nonDrink;
 
     @Column(name="dessertName")
     private String dessertName;
@@ -33,18 +37,8 @@ public class DessertActivity {
     @Column(name="description")
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private DessertImage dessertImage;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private Drink drink;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private NonDrink nonDrink;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dessertActivity", cascade = CascadeType.ALL)
+    private List<DessertImage> dessertImageList = new ArrayList<>();
 
     @Column(name="updatedAt")
     @LastModifiedDate
@@ -57,8 +51,6 @@ public class DessertActivity {
     @Builder
     public DessertActivity(Long idx, Long drinkIdx, Long nonDrinkIdx, String dessertName , String description,  LocalDateTime updatedAt, LocalDateTime createdAt){
         this.idx = idx;
-        this.drinkIdx = drinkIdx;
-        this.nonDrinkIdx = nonDrinkIdx;
         this.dessertName = dessertName;
         this.description = description;
         this.updatedAt = updatedAt;
