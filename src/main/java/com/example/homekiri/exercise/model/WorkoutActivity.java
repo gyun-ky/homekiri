@@ -8,6 +8,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -38,13 +40,11 @@ public class WorkoutActivity {
     private LocalDateTime updatedAt;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private WorkoutImg workoutImg;
+    @OneToMany(mappedBy = "workoutActivity")
+    private List<WorkoutImg> workoutImgs = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idx")
-    private WorkoutVideo workoutVideo;
+    @OneToMany(mappedBy = "workoutActivity")
+    private List<WorkoutVideo> workoutVideos = new ArrayList<>();
 
     @Column(name="createdAt")
     @CreatedDate

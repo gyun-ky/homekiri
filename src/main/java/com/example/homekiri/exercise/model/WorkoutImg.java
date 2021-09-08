@@ -27,7 +27,8 @@ public class WorkoutImg {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "workoutImg")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idx")
     private WorkoutActivity workoutActivity;
 
     @Column(name="updatedAt")

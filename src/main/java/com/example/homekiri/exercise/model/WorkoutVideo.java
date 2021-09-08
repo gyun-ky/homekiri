@@ -27,7 +27,8 @@ public class WorkoutVideo {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "workoutVideo")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idx")
     private WorkoutActivity workoutActivity;
 
 

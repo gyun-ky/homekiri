@@ -7,7 +7,6 @@ import com.example.homekiri.exercise.Dto.WorkoutActivityResponseDto;
 import com.example.homekiri.exercise.service.WorkoutActivityDetailsService;
 import com.example.homekiri.library.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
