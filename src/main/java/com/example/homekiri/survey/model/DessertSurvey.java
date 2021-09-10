@@ -20,7 +20,7 @@ public class DessertSurvey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
     private User user;
 

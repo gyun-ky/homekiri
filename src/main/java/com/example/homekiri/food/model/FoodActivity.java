@@ -21,7 +21,7 @@ public class FoodActivity {
     @Column(name="idx")
     private Long idx;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "countryIdx")
     private Country country;
 

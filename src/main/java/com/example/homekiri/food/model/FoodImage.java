@@ -20,7 +20,7 @@ public class FoodImage {
     @Column(name = "idx")
     private Long idx;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodIdx")
     private FoodActivity food;
 
