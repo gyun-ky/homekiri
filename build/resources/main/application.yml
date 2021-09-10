@@ -22,8 +22,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
     # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
 
-    logging:
+logging:
 #      config: classpath:logback-spring.xml
-      level:
-        org.springframework.security: DEBUG
+  level:
+    org.springframework.security: DEBUG
+    org.hibernate.type.descriptor.sql: trace
 
