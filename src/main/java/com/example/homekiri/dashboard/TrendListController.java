@@ -59,14 +59,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/media-trend-list")
     public BaseResponse<List<MediaTrendListResponseDto>> returnMediaTrend(@PathVariable Long userIdx){
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             List<MediaTrendListResponseDto> result = mediaTrendListService.returnMediaTrend();
@@ -87,14 +87,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/food-trend-list")
     public BaseResponse<List<FoodTrendListResponseDto>> returnFoodTrend(@PathVariable Long userIdx){
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             List<FoodTrendListResponseDto> result = foodTrendListService.returnFoodTrend();
@@ -115,14 +115,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/dessert-trend-list")
     public BaseResponse<List<DessertTrendListResponseDto>> returnDessertTrend(@PathVariable Long userIdx){
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             List<DessertTrendListResponseDto> result = dessertTrendListService.returnDessertTrend();
@@ -143,14 +143,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/workout-trend-list")
     public BaseResponse<List<WorkoutTrendListResponseDto>> returnWorkoutTrend(@PathVariable Long userIdx){
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             List<WorkoutTrendListResponseDto> result = workoutTrendListService.returnWorkoutTrend();

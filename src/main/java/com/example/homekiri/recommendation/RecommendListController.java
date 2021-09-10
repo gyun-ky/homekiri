@@ -49,14 +49,14 @@ public class RecommendListController {
     @GetMapping("/{userIdx}/{size}")
     public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long userIdx, @PathVariable Long size){
 
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             HashMap<String, Object> result = recommendListService.recommend(userIdx, size);

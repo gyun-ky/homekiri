@@ -46,14 +46,14 @@ public class FoodSpecificActivityController {
     @ResponseBody
     @GetMapping("/{userIdx}/food/{foodIdx}")
     public BaseResponse<FoodActivityResponseDto> returnFoodActivity(@PathVariable Long foodIdx, @PathVariable Long userIdx){
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
         try{
             FoodActivityResponseDto result = foodActivityDetailsService.findById(foodIdx);
             return new BaseResponse<>(result);
