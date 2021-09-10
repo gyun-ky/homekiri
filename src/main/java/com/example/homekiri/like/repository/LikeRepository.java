@@ -30,7 +30,7 @@ public class LikeRepository {
      @return List<LikeFoodDto>
      */
     public List<LikeFoodDto> findLikeFoodByUserIdx(Long userIdx){
-        List<Object[]> queryResult = em.createQuery("SELECT f, c FROM LikeFood l JOIN l.user u Join l.food f JOIN f.country c WHERE u.idx = :userIdx order by l.createdAt DESC")
+        List<Object[]> queryResult = em.createQuery("SELECT l.food, l.food.country, l.user, MAX(fImg.imgUrl) FROM LikeFood l JOIN FETCH l.food.foodImages fImg WHERE l.user.idx = :userIdx order by l.createdAt DESC")
                 .setParameter("userIdx", userIdx).getResultList();
 
         System.out.println("[REPO] findLikeFoodByUserIdx queryResult complete");
