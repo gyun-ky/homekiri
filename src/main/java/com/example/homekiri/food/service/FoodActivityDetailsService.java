@@ -13,8 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class FoodActivityDetailsService {
     private final FoodRecommendListRepository foodRecommendListRepository;
-
-    @Transactional(readOnly = true)
+    /**
+     * 음식 상세 설명 Service
+     * @param Long idx
+     * @return FoodActivityResponseDto
+     */
+    @Transactional
     public FoodActivityResponseDto findById(Long idx) throws BaseException {
         FoodActivity res = foodRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new FoodActivityResponseDto(res);

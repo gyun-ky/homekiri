@@ -49,7 +49,7 @@ public class MediaSpecificActivityController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}/media/{mediaIdx}")
-    public BaseResponse<MediaActivityResponseDto> returnMediaActivity(@PathVariable Long mediaIdx, @PathVariable Long userIdx){
+    public BaseResponse<MediaActivityResponseDto> returnMediaActivity(@PathVariable Long mediaIdx, @PathVariable Long userIdx, @RequestHeader String jwt){
 //        //jwt 인증
 //        try {
 //            if (!jwtAuth(userIdx)) {

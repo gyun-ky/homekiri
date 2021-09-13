@@ -107,7 +107,7 @@ public class TrendListController {
 
     /**
      * 디저트 트렌드 리스트 API
-     * [GET] /web/dashboard/dessert-trend-list
+     * [GET] /web/dashboard/{userIdx}/dessert-trend-list
      * @param Long userIdx
      * @return BaseResponse<List<DessertTrendListResponseDto>>
      * if (DessertTrendList is Null) Throw NO_TREND_LIST_ERROR
@@ -135,7 +135,7 @@ public class TrendListController {
 
     /**
      * 운동 트렌드 리스트 API
-     * [GET] /web/dashboard/workout-trend-list
+     * [GET] /web/dashboard/{userIdx}/workout-trend-list
      * @param Long userIdx
      * @return BaseResponse<List<WorkoutTrendListResponseDto>>
      * if (WorkoutTrendList is Null) Throw NO_TREND_LIST_ERROR

@@ -1,6 +1,7 @@
 package com.example.homekiri.food.Dto;
 
 import com.example.homekiri.food.model.FoodActivity;
+import com.example.homekiri.food.model.FoodImage;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -18,18 +19,19 @@ public class FoodActivityResponseDto {
     private List<String> recipe;
     private String temperature;
     private String cookingState;
-    private String imgUrl;
+    private List<String> imgUrl;
 
     public FoodActivityResponseDto(FoodActivity entity){
         this.idx = entity.getIdx();
-        this.country = CountryIdxToString(entity.getCountry().getIdx());
+        this.country = entity.getCountry().getCountryName();
         this.foodName = entity.getFoodName();
         this.description = entity.getDescription();
         this.ingredient = entity.getIngredient();
         this.recipe = Parsing(entity.getRecipe());
         this.temperature = entity.getTemperature();
         this.cookingState = entity.getCookingState();
-        this.imgUrl = entity.getFoodImages().get(0).getImgUrl();
+        for(FoodImage a: entity.getFoodImages())
+            this.imgUrl.add(a.getImgUrl());
     }
 
     //recipe parsing by "delim"
@@ -42,10 +44,4 @@ public class FoodActivityResponseDto {
         return res;
     }
 
-    public String CountryIdxToString(Long idx){
-        if(idx == 1) return "한식";
-        else if(idx == 2) return "일식";
-        else if(idx == 3) return "중식";
-        else  return "양식";
-    }
 }

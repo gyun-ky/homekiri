@@ -15,13 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MediaActivityDetailsService {
     private final MediaRecommendListRepository mediaRecommendListRepository;
-    private final MediaPlatformRepository mediaPlatformRepository;
-    @Transactional(readOnly = true)
+
+    /**
+     * 미디어 상세 설명 Service
+     * @param Long idx
+     * @return MediaActivityResponseDto
+     */
+    @Transactional
     public MediaActivityResponseDto findById(Long idx) throws BaseException {
         if(idx == -1)
             throw new BaseException(BaseResponseStatus.MEDIA_DATA_LACK_ERROR);
         MediaActivity res1 = mediaRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
-        MediaPlatform res3 = mediaPlatformRepository.findMediaPlatformByMediaIdx(idx);
-        return new MediaActivityResponseDto(res1, res3);
+        return new MediaActivityResponseDto(res1);
     }
 }

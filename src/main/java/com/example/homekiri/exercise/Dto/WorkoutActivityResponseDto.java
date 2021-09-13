@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class WorkoutActivityResponseDto {
     private Long idx;
-    private String type;
+    private String Category;
     private String difficulty;
     private String target;
     private String exerciseName;
@@ -20,7 +20,7 @@ public class WorkoutActivityResponseDto {
 
     public WorkoutActivityResponseDto(WorkoutActivity entity){
         this.idx = entity.getIdx();
-        this.type = entity.getType().getTypeName();
+        this.Category = entity.getType().getTypeName();
         this.difficulty = entity.getDifficulty().getStatus();
         this.target = entity.getTarget().getTargetName();
         this.exerciseName = entity.getExerciseName();

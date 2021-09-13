@@ -2,10 +2,8 @@ package com.example.homekiri.recommendation.service;
 
 import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponseStatus;
+import com.example.homekiri.dessert.model.DessertActivity;
 import com.example.homekiri.dessert.model.Drink;
-import com.example.homekiri.dessert.model.NonDrink;
-import com.example.homekiri.dessert.repository.DrinkRepository;
-import com.example.homekiri.media.Dto.MediaActivityResponseDto;
 import com.example.homekiri.recommendation.Dto.DessertRecommendDto;
 import com.example.homekiri.recommendation.Dto.FoodRecommendDto;
 import com.example.homekiri.recommendation.Dto.MediaRecommendDto;
@@ -26,7 +24,6 @@ import com.example.homekiri.dessert.repository.DessertPreferenceRepository;
 import com.example.homekiri.food.repository.FoodPreferenceRepository;
 import com.example.homekiri.media.repository.MediaPreferenceRepository;
 import com.example.homekiri.exercise.repository.WorkoutPreferenceRepository;
-import com.example.homekiri.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +41,6 @@ public class RecommendListService {
     private final WorkoutPreferenceRepository workoutPreferenceRepository;
 
 
-    //Activity Info
-    private final DrinkRepository drinkRepository;
-    private final com.example.homekiri.dessert.repository.nonDrinkRepository nonDrinkRepository;
-
 
     //Activity Repo
     private final DessertRecommendListRepository dessertRecommendListRepository;
@@ -55,7 +48,11 @@ public class RecommendListService {
     private final MediaRecommendListRepository mediaRecommendListRepository;
     private final WorkoutRecommendListRepository workoutRecommendListRepository;
 
-
+    /**
+     * 추천 Service
+     * @param Long UserIdx, RECOMMEND_SIZE
+     * @return DessertActivityResponseDto
+     */
     @Transactional
     public HashMap<String, Object> recommend(Long UserIdx, Long RECOMMEND_SIZE) throws BaseException {
         int RECOMMEND_SCORE = 70;
@@ -163,6 +160,7 @@ public class RecommendListService {
         if(dessertPreference.getFruit()>= RECOMMEND_SCORE)
             DessertColumnCandidates.add(9);
 
+
         //난이도 상
         if(workoutPreference.getDifficulty() >= RECOMMEND_SCORE)
             WorkoutColumnCandidates.add(0);
@@ -192,23 +190,28 @@ public class RecommendListService {
         List<Long> TempWorkoutList = new ArrayList<>();
 
 
-        for(int i = 0; i <Math.min(4, DessertColumnCandidates.size()); ++i)
+        for(int i = 0; i <Math.min(8, DessertColumnCandidates.size()); ++i)
             TempDessertList = MakeDessertLists(DessertColumnCandidates.get(i), TempDessertList);
 
-        for(int i = 0; i <Math.min(4, FoodColumnCandidates.size()); ++i)
+        for(int i = 0; i <Math.min(8, FoodColumnCandidates.size()); ++i)
             TempFoodList = MakeFoodLists(FoodColumnCandidates.get(i), TempFoodList);
 
-        for(int i = 0; i <Math.min(4, MediaColumnCandidates.size()); ++i)
+        for(int i = 0; i <Math.min(8, MediaColumnCandidates.size()); ++i)
             TempMediaList = MakeMediaLists(MediaColumnCandidates.get(i), TempMediaList);
 
-        for(int i = 0; i <Math.min(4, WorkoutColumnCandidates.size()); ++i)
+        for(int i = 0; i <Math.min(8, WorkoutColumnCandidates.size()); ++i)
             TempWorkoutList = MakeWorkoutLists(WorkoutColumnCandidates.get(i), TempWorkoutList);
 
 
 
-        if(TempMediaList.size() < RECOMMEND_SIZE  || TempFoodList.size() < RECOMMEND_SIZE || TempDessertList.size() < RECOMMEND_SIZE || TempWorkoutList.size() < RECOMMEND_SIZE)
+        if(TempMediaList.size() < RECOMMEND_SIZE  || TempFoodList.size() < RECOMMEND_SIZE || TempDessertList.size() < RECOMMEND_SIZE || TempWorkoutList.size() < RECOMMEND_SIZE){
+            System.out.println(TempMediaList.size());
+            System.out.println(TempFoodList.size());
+            System.out.println(TempDessertList.size());
+            System.out.println(TempWorkoutList.size());
             throw new BaseException(BaseResponseStatus.PREFERENCE_LACK_ERROR);
 
+        }
         //엑티비티 셔플
         Collections.shuffle(TempMediaList);
         Collections.shuffle(TempFoodList);
@@ -567,8 +570,8 @@ public class RecommendListService {
     List<Long> MakeDessertLists(Integer col, List<Long> TempDessertList){
         //카페인 선호도
         if(col == 0) {
-            List<Drink> res = drinkRepository.findDrinksByCaffeine("Y");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_Caffeine("Y");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -576,8 +579,8 @@ public class RecommendListService {
         }
         //베이커리 선호도
         else if(col == 1){
-            List<NonDrink> res = nonDrinkRepository.findAll();
-            for (NonDrink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByNonDrinkIsNot(null);
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -585,8 +588,8 @@ public class RecommendListService {
         }
         //단거 선호도
         else if(col == 2){
-            List<Drink> res = drinkRepository.findDrinksByFlavor("단");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_Flavor("sweet");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -594,8 +597,8 @@ public class RecommendListService {
         }
         //신거 선호도
         else if(col == 3){
-            List<Drink> res = drinkRepository.findDrinksByFlavor("쓴");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_Flavor("sour");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -603,8 +606,8 @@ public class RecommendListService {
         }
         //쓴거 선호도
         else if(col == 4){
-            List<Drink> res = drinkRepository.findDrinksByFlavor("신");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_Flavor("bitter");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -612,8 +615,8 @@ public class RecommendListService {
         }
         //찬거 선호도
         else if(col == 5){
-            List<Drink> res = drinkRepository.findDrinksByTemperatureContains("ICE");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_TemperatureContains("ICE");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -621,8 +624,8 @@ public class RecommendListService {
         }
         //뜨거운거 선호도
         else if(col == 6){
-            List<Drink> res = drinkRepository.findDrinksByTemperatureContains("HOT");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_TemperatureContains("HOT");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -630,8 +633,8 @@ public class RecommendListService {
         }
         //스무디 선호도
         else if(col == 7){
-            List<Drink> res = drinkRepository.findDrinksByDrinkNameContains("스무디");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_DrinkName("smoothie");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
@@ -639,16 +642,20 @@ public class RecommendListService {
         }
         //티 선호도
         else if(col == 8){
-            List<Drink> res = drinkRepository.findDrinksByDrinkNameContainsOrDrinkNameContains("차", "티");
-            for (Drink re : res) {
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_DrinkNameOrDrink_DrinkName("tea", "milk tea");
+            for (DessertActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempDessertList.contains(idx))
+                    TempDessertList.add(idx);
+            }        }
+        //과일류 선호도
+        else if(col == 9){
+            List<DessertActivity> res = dessertRecommendListRepository.findDessertActivitiesByDrink_DrinkName("juice");
+            for (DessertActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempDessertList.contains(idx))
                     TempDessertList.add(idx);
             }
-        }
-        //과일류 선호도
-        else if(col == 9){
-            System.out.println("Hi");
         }
         return TempDessertList;
     }
