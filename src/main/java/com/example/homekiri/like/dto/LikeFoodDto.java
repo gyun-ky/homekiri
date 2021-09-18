@@ -26,4 +26,6 @@ public class LikeFoodDto {
 
     private Country country;
 
+    private String imageUrl;
+
 }

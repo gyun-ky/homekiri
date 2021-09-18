@@ -1,5 +1,6 @@
 package com.example.homekiri.exercise.model;
 
+import com.example.homekiri.like.model.LikeExercise;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,9 @@ public class WorkoutActivity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "targetIdx")
     private Target target;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workout")
+    private List<LikeExercise> likeExercises = new ArrayList<>();
 
     @Column(name="exerciseName")
     private String exerciseName;

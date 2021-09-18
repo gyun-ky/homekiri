@@ -1,5 +1,6 @@
 package com.example.homekiri.media.model;
 
+import com.example.homekiri.like.model.LikeMedia;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,9 @@ public class MediaActivity {
 
     @Column(name="actorList")
     private String actorList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
+    private List<LikeMedia> likeMedias = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     private List<MediaImage> mediaImages = new ArrayList<>();
