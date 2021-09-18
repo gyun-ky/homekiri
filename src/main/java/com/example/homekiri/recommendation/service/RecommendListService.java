@@ -95,6 +95,8 @@ public class RecommendListService {
             FoodColumnCandidates.add(12);
         if(foodPreference.getSoup()>=RECOMMEND_SCORE)
             FoodColumnCandidates.add(13);
+        if(foodPreference.getSeaFood()>=RECOMMEND_SCORE)
+            FoodColumnCandidates.add(14);
 
 
         if(mediaPreference.getScienceFiction() >= RECOMMEND_SCORE)
@@ -254,7 +256,7 @@ public class RecommendListService {
     List<Long> MakeFoodLists(Integer col, List<Long> TempFoodList){
         //소고기 선호도
         if(col == 0){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("소고기");
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("beef");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
@@ -263,7 +265,7 @@ public class RecommendListService {
         }
         //닭고기 선호도
         else if(col == 1){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("닭고기");
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("chicken");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
@@ -272,7 +274,7 @@ public class RecommendListService {
         }
         //돼지고기 선호도
         else if(col == 2){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("돼지고기");
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("pork");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
@@ -281,7 +283,7 @@ public class RecommendListService {
         }
         //면 선호도
         else if(col == 3){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("면");
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("noodle");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
@@ -290,7 +292,7 @@ public class RecommendListService {
         }
         //밥 선호도
         else if(col == 4){
-            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("밥");
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("rice");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
@@ -372,6 +374,14 @@ public class RecommendListService {
         //국물 선호도
         else if(col == 13){
             List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByCookingStateContains("soup");
+            for (FoodActivity re : res) {
+                Long idx = re.getIdx();
+                if (!TempFoodList.contains(idx))
+                    TempFoodList.add(idx);
+            }
+        }
+        else if(col == 14){
+            List<FoodActivity> res = foodRecommendListRepository.findFoodActivitiesByIngredient("seaFood");
             for (FoodActivity re : res) {
                 Long idx = re.getIdx();
                 if (!TempFoodList.contains(idx))
