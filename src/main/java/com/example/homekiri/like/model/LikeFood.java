@@ -24,11 +24,11 @@ public class LikeFood {
     @Column(name="idx")
     private Long idx;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodIdx")
     private FoodActivity food;
 
