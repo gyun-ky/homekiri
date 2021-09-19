@@ -143,14 +143,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/workout-trend-list")
     public BaseResponse<List<WorkoutTrendListResponseDto>> returnWorkoutTrend(@PathVariable Long userIdx){
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return new BaseResponse<>(e.getStatus());
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
 
         try{
             List<WorkoutTrendListResponseDto> result = workoutTrendListService.returnWorkoutTrend();
