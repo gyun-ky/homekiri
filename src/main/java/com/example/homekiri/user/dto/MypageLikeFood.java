@@ -22,7 +22,7 @@ public class MypageLikeFood {
         FoodActivity food = likeFoodDto.getFood();
         this.idx = food.getIdx();
         this.name = food.getFoodName();
-        this.category = food.getCountry().getCountryName();
-        this.imageUrl = food.getFoodImages().get(0).getImgUrl();
+        this.category = likeFoodDto.getCountry().getCountryName();
+        this.imageUrl = likeFoodDto.getImageUrl();
     }
 }
