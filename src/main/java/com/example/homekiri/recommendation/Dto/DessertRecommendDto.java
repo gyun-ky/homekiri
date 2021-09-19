@@ -18,10 +18,10 @@ public class DessertRecommendDto {
         this.idx = entity1.getIdx();
         this.dessertName = entity1.getDessertName();
 
-        if(entity1.getDrink().getIdx() != -1)
-            this.Category = "음료";
+        if(entity1.getDrink() != null)
+            this.Category = entity1.getDrink().getDrinkName();
         else
-            this.Category = "디저트";
+            this.Category = entity1.getNonDrink().getNonDrinkName();
         this.imgUrl = new ArrayList<>();
         for(DessertImage url: entity1.getDessertImageList())
             imgUrl.add(url.getImgUrl());

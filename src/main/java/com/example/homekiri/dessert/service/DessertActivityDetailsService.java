@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class DessertActivityDetailsService {
     private final DessertRecommendListRepository dessertRecommendListRepository;
-    /*
+    /**
      * 디저트 상세 설명 Service
-     * @param Long
+     * @param Long idx
      * @return DessertActivityResponseDto
      */
     @Transactional(readOnly = true)

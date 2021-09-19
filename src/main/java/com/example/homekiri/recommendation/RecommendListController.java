@@ -46,17 +46,17 @@ public class RecommendListController {
      * if activity.size() < RECOMMEND_SIZE Throw PREFERENCE_LACK_ERROR
      */
     @ResponseBody
-    @GetMapping("/{userIdx}/{size}")
-    public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long userIdx, @PathVariable Long size){
+    @GetMapping("/{userIdx}")
+    public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long userIdx, @RequestParam(required = false, defaultValue = "8") Long size){
 
-        //jwt 인증
-        try {
-            if (!jwtAuth(userIdx)) {
-                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-            }
-        }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
-        }
+//        //jwt 인증
+//        try {
+//            if (!jwtAuth(userIdx)) {
+//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+//            }
+//        }catch (BaseException e){
+//            return new BaseResponse<>(e.getStatus());
+//        }
 
         try{
             HashMap<String, Object> result = recommendListService.recommend(userIdx, size);

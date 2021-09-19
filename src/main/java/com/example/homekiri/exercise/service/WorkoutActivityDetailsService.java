@@ -14,8 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class WorkoutActivityDetailsService {
     private final WorkoutRecommendListRepository workoutRecommendListRepository;
 
-
-    @Transactional(readOnly = true)
+    /**
+     * 운동 상세 설명 Service
+     * @param Long idx
+     * @return WorkoutActivityResponseDto
+     */
+    @Transactional
     public WorkoutActivityResponseDto findById(Long idx) throws BaseException{
         WorkoutActivity res = workoutRecommendListRepository.findById(idx).orElseThrow(()->new BaseException(BaseResponseStatus.ACTIVITY_IDX_ERROR));
         return new WorkoutActivityResponseDto(res);
