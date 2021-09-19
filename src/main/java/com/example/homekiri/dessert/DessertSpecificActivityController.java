@@ -47,14 +47,14 @@ public class DessertSpecificActivityController {
     @ResponseBody
     @GetMapping("/{userIdx}/dessert/{dessertIdx}")
     public BaseResponse<DessertActivityResponseDto> returnDessertActivity(@PathVariable Long dessertIdx, @PathVariable Long userIdx){
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return new BaseResponse<>(e.getStatus());
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
         try{
             System.out.println(dessertIdx);
             DessertActivityResponseDto result = dessertActivityDetailsService.findById(dessertIdx);

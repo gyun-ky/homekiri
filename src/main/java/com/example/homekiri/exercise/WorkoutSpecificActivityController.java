@@ -47,14 +47,14 @@ public class WorkoutSpecificActivityController {
     @ResponseBody
     @GetMapping("/{userIdx}/workout/{workoutIdx}")
     public BaseResponse<WorkoutActivityResponseDto> returnWorkoutActivity(@PathVariable Long workoutIdx, @PathVariable Long userIdx){
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return new BaseResponse<>(e.getStatus());
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
 
         try{
             WorkoutActivityResponseDto result = workoutActivityDetailsService.findById(workoutIdx);
