@@ -1,5 +1,6 @@
 package com.example.homekiri.exercise.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Type")
 @Entity
-public class Type {
+public class Type extends Auditable {
     @Id
     @Column(name="idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +29,5 @@ public class Type {
     @Column(name="description")
     private String description;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 }

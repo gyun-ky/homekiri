@@ -1,5 +1,6 @@
 package com.example.homekiri.dashboard.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "DessertTrend")
-public class  DessertTrend {
+public class  DessertTrend extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,19 +29,12 @@ public class  DessertTrend {
     @Column(name = "ranking")
     private int ranking;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public DessertTrend(Long idx, Long dessertIdx, String dessertName, int ranking, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public DessertTrend(Long idx, Long dessertIdx, String dessertName, int ranking){
         this.idx = idx;
         this.dessertIdx = dessertIdx;
         this.dessertName = dessertName;
         this.ranking = ranking;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 }

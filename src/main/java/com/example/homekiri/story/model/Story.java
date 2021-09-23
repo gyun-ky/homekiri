@@ -1,11 +1,12 @@
 package com.example.homekiri.story.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.user.model.User;
 
 import javax.persistence.*;
 
 @Entity
-public class Story {
+public class Story extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

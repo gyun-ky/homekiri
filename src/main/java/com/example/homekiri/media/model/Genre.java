@@ -1,5 +1,6 @@
 package com.example.homekiri.media.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "Genre")
-public class Genre {
+public class Genre extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idx")
@@ -27,12 +28,6 @@ public class Genre {
     private String genreName;
 
     private String description;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 
 }

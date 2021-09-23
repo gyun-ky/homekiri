@@ -6,6 +6,8 @@ import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.library.JwtService;
 import com.example.homekiri.recommendation.service.RecommendListService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -47,7 +49,7 @@ public class RecommendListController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}")
-    public BaseResponse<HashMap<String, Object>> returnRecommendList(@PathVariable Long userIdx, @RequestParam(required = false, defaultValue = "8") Long size){
+    public ResponseEntity<? extends BaseResponse> returnRecommendList(@PathVariable Long userIdx, @RequestParam(required = false, defaultValue = "8") Long size){
 
         //jwt 인증
         try {
@@ -55,14 +57,14 @@ public class RecommendListController {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
         try{
             HashMap<String, Object> result = recommendListService.recommend(userIdx, size);
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 }

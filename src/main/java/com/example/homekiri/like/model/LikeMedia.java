@@ -1,5 +1,6 @@
 package com.example.homekiri.like.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.food.model.FoodActivity;
 import com.example.homekiri.media.model.MediaActivity;
 import com.example.homekiri.user.model.User;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LikeMedia {
+public class LikeMedia extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
@@ -32,9 +33,4 @@ public class LikeMedia {
     @JoinColumn(name = "mediaIdx")
     private MediaActivity media;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 }

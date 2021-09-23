@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +23,19 @@ import java.util.stream.Collectors;
 @Service
 public class MediaTrendListService {
     private final MediaTrendListRepository mediaTrendListRepository;
-
-    @Transactional(readOnly = true)
+    static int TREND_SIZE = 5;
+    @Transactional
     public List<MediaTrendListResponseDto> returnMediaTrend() throws BaseException{
 
-        if(mediaTrendListRepository.findAll().isEmpty())
+        if(mediaTrendListRepository.findAll().size() < TREND_SIZE)
             throw new BaseException(BaseResponseStatus.NO_TREND_LIST_ERROR);
 
-        return mediaTrendListRepository.findAll().stream()
-                .map(MediaTrendListResponseDto::new)
-                .collect(Collectors.toList());
+        List<MediaTrendListResponseDto> result = new ArrayList<>();
+
+        for(int i = 0; i <TREND_SIZE; ++i)
+            result.add(mediaTrendListRepository.findAll().stream()
+                    .map(MediaTrendListResponseDto::new)
+                    .collect(Collectors.toList()).get(i));
+        return result;
     }
 }

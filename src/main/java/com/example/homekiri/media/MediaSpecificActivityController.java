@@ -9,6 +9,8 @@ import com.example.homekiri.media.service.MediaActivityDetailsService;
 import com.example.homekiri.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -49,20 +51,20 @@ public class MediaSpecificActivityController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}/media/{mediaIdx}")
-    public BaseResponse<MediaActivityResponseDto> returnMediaActivity(@PathVariable Long mediaIdx, @PathVariable Long userIdx, @RequestHeader String jwt){
+    public ResponseEntity<? extends BaseResponse> returnMediaActivity(@PathVariable Long mediaIdx, @PathVariable Long userIdx, @RequestHeader String jwt){
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
         try{
             MediaActivityResponseDto result = mediaActivityDetailsService.findById(mediaIdx);
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         } catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 

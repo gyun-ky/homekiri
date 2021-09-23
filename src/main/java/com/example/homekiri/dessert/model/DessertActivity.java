@@ -1,5 +1,6 @@
 package com.example.homekiri.dessert.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.exercise.model.WorkoutImg;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Dessert")
 @Entity
-public class DessertActivity {
+public class DessertActivity extends Auditable {
 
     @Id
     @Column(name="idx")
@@ -40,20 +41,11 @@ public class DessertActivity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dessertActivity", cascade = CascadeType.ALL)
     private List<DessertImage> dessertImageList = new ArrayList<>();
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public DessertActivity(Long idx, Long drinkIdx, Long nonDrinkIdx, String dessertName , String description,  LocalDateTime updatedAt, LocalDateTime createdAt){
+    public DessertActivity(Long idx, Long drinkIdx, Long nonDrinkIdx, String dessertName , String description){
         this.idx = idx;
         this.dessertName = dessertName;
         this.description = description;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 }

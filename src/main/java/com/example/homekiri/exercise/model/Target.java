@@ -1,6 +1,7 @@
 package com.example.homekiri.exercise.model;
 
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.media.model.MediaActivity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Target")
 @Entity
-public class Target {
+public class Target extends Auditable {
     @Id
     @Column(name="idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +28,5 @@ public class Target {
     @Column(name = "targetName")
     private String targetName;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 }
