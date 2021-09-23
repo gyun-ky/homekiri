@@ -1,5 +1,6 @@
 package com.example.homekiri.user.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.survey.model.DessertSurvey;
 import com.example.homekiri.survey.model.ExerciseSurvey;
 import com.example.homekiri.survey.model.FoodSurvey;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,7 +24,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @AllArgsConstructor
-public class User {
+public class User extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idx")
@@ -48,11 +50,7 @@ public class User {
     @OneToOne(mappedBy = "user")
     private MediaSurvey mediaSurvey;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     public User(){}
     public User(PostSignInReq postSignInReq, String password){
