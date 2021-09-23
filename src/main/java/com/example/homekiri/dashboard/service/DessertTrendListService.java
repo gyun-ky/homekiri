@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class DessertTrendListService {
     private final DessertTrendListRepository dessertTrendListRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<DessertTrendListResponseDto> returnDessertTrend()  throws BaseException {
 
         if(dessertTrendListRepository.findAll().isEmpty())
