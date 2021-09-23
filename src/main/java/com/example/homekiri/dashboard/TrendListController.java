@@ -62,14 +62,14 @@ public class TrendListController {
     @GetMapping("/{userIdx}/media-trend-list")
     public ResponseEntity<? extends BaseResponse> returnMediaTrend(@PathVariable Long userIdx){
 
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
+        }
 
         try{
             List<MediaTrendListResponseDto> result = mediaTrendListService.returnMediaTrend();
@@ -91,14 +91,14 @@ public class TrendListController {
     @GetMapping("/{userIdx}/food-trend-list")
     public ResponseEntity<? extends BaseResponse> returnFoodTrend(@PathVariable Long userIdx){
 
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
+        }
 
         try{
             List<FoodTrendListResponseDto> result = foodTrendListService.returnFoodTrend();
@@ -119,14 +119,14 @@ public class TrendListController {
     @ResponseBody
     @GetMapping("/{userIdx}/dessert-trend-list")
     public ResponseEntity<? extends BaseResponse> returnDessertTrend(@PathVariable Long userIdx){
-//        //jwt 인증
-//        try {
-//            if (!jwtAuth(userIdx)) {
-//                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
-//            }
-//        }catch (BaseException e){
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
-//        }
+        //jwt 인증
+        try {
+            if (!jwtAuth(userIdx)) {
+                throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
+            }
+        }catch (BaseException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
+        }
 
         try{
             List<DessertTrendListResponseDto> result = dessertTrendListService.returnDessertTrend();

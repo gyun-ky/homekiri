@@ -7,6 +7,8 @@ import com.example.homekiri.dessert.Dto.DessertActivityResponseDto;
 import com.example.homekiri.dessert.service.DessertActivityDetailsService;
 import com.example.homekiri.library.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -46,23 +48,21 @@ public class DessertSpecificActivityController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}/dessert/{dessertIdx}")
-    public BaseResponse<DessertActivityResponseDto> returnDessertActivity(@PathVariable Long dessertIdx, @PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> returnDessertActivity(@PathVariable Long dessertIdx, @PathVariable Long userIdx){
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
         try{
-            System.out.println(dessertIdx);
             DessertActivityResponseDto result = dessertActivityDetailsService.findById(dessertIdx);
-            System.out.println(result);
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }
         catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 }

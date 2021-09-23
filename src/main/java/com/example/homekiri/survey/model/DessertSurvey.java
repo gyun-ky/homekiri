@@ -1,5 +1,6 @@
 package com.example.homekiri.survey.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.survey.Dto.DessertRequestDto;
 import com.example.homekiri.user.model.User;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "DessertPreference")
-public class DessertSurvey {
+public class DessertSurvey extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +38,6 @@ public class DessertSurvey {
     private int sour;
     private int bitter;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     public DessertSurvey() {
     }

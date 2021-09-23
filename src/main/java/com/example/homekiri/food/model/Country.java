@@ -1,5 +1,6 @@
 package com.example.homekiri.food.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Country {
+public class Country extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +31,4 @@ public class Country {
 
     private String description;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 }

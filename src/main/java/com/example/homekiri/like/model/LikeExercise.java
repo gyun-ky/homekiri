@@ -1,5 +1,6 @@
 package com.example.homekiri.like.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.exercise.model.WorkoutActivity;
 import com.example.homekiri.food.model.FoodActivity;
 import com.example.homekiri.user.model.User;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class LikeExercise {
+public class LikeExercise extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
@@ -29,9 +30,4 @@ public class LikeExercise {
     @JoinColumn(name = "exerciseIdx")
     private WorkoutActivity workout;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 }

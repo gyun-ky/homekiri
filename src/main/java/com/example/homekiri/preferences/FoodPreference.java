@@ -1,5 +1,6 @@
 package com.example.homekiri.preferences;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "FoodPreference")
-public class FoodPreference {
+public class FoodPreference extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,11 +64,6 @@ public class FoodPreference {
     @Column(name = "roasted")
     private Long roasted;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 }
 

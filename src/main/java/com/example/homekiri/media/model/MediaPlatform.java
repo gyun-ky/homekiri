@@ -1,5 +1,6 @@
 package com.example.homekiri.media.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name="Media_Platform")
 @Entity
-public class MediaPlatform {
+public class MediaPlatform extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="idx")
@@ -29,21 +30,11 @@ public class MediaPlatform {
     private Platform platform;
 
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public MediaPlatform(Long idx, MediaActivity media, Platform platform , LocalDateTime updatedAt, LocalDateTime createdAt){
+    public MediaPlatform(Long idx, MediaActivity media, Platform platform ){
         this.idx = idx;
         this.media = media;
         this.platform = platform;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 }

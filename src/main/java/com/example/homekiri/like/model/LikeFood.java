@@ -1,5 +1,6 @@
 package com.example.homekiri.like.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.food.model.FoodActivity;
 import com.example.homekiri.user.model.User;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LikeFood {
+public class LikeFood extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +33,5 @@ public class LikeFood {
     @JoinColumn(name = "foodIdx")
     private FoodActivity food;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 }

@@ -1,5 +1,6 @@
 package com.example.homekiri.dessert.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name="DessertImage")
 @Entity
-public class DessertImage {
+public class DessertImage extends Auditable {
 
     @Id
     @Column(name ="idx")
@@ -30,20 +31,11 @@ public class DessertImage {
     @Column(name = "description")
     private String description;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public DessertImage(Long idx, String description, String imgUrl, LocalDateTime createdAt, LocalDateTime updatedAt){
+    public DessertImage(Long idx, String description, String imgUrl){
         this.idx = idx;
         this.imgUrl =  imgUrl;
         this.description = description;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 }

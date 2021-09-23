@@ -1,5 +1,6 @@
 package com.example.homekiri.exercise.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name="ExerciseImage")
 @Entity
-public class WorkoutImg {
+public class WorkoutImg extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +30,6 @@ public class WorkoutImg {
     @Column(name = "description")
     private String description;
 
-
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 //    @Builder
 //    public WorkoutImg(Long idx, Long exerciseIdx, String imgUrl, String description, LocalDateTime updatedAt, LocalDateTime createdAt){

@@ -10,6 +10,8 @@ import com.example.homekiri.survey.Service.FoodSurveyService;
 import com.example.homekiri.survey.Service.MediaSurveyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -23,42 +25,42 @@ public class SurveyController {
     private final ExerciseSurveyService exerciseSurveyService;
 
     @PostMapping("/{userIdx}/food")
-    public BaseResponse<FoodResponseDto> saveFoodSurveyResult(@RequestBody FoodRequestDto foodRequestDto, @PathVariable Long userIdx) {
+    public ResponseEntity<? extends BaseResponse> saveFoodSurveyResult(@RequestBody FoodRequestDto foodRequestDto, @PathVariable Long userIdx) {
         try {
             Long result = foodsurveyService.updateFoodSurvey(foodRequestDto, userIdx);
-            return new BaseResponse(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         } catch (BaseException e) {
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
     @PostMapping("/{userIdx}/dessert")
-    public BaseResponse<DessertResponseDto> saveDessertResult(@RequestBody DessertRequestDto dessertRequestDto, @PathVariable Long userIdx) {
+    public ResponseEntity<? extends BaseResponse> saveDessertResult(@RequestBody DessertRequestDto dessertRequestDto, @PathVariable Long userIdx) {
         try {
             Long result = dessertSurveyService.updateDessertSurvey(dessertRequestDto, userIdx);
-            return new BaseResponse(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         } catch (BaseException e) {
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
     @PostMapping("/{userIdx}/media")
-    public BaseResponse<MediaResponseDto> saveMediaResult(@RequestBody MediaRequestDto mediaRequestDto, @PathVariable Long userIdx) {
+    public ResponseEntity<? extends BaseResponse> saveMediaResult(@RequestBody MediaRequestDto mediaRequestDto, @PathVariable Long userIdx) {
         try {
             Long result = mediaSurveyService.updateMediaSurvey(mediaRequestDto, userIdx);
-            return new BaseResponse(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         } catch (BaseException e) {
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
     @PostMapping("/{userIdx}/exercise")
-    public BaseResponse<ExerciseResponseDto> saveExerciseResult(@RequestBody ExerciseRequestDto exerciseRequestDto, @PathVariable Long userIdx) {
+    public ResponseEntity<? extends BaseResponse> saveExerciseResult(@RequestBody ExerciseRequestDto exerciseRequestDto, @PathVariable Long userIdx) {
         try {
             Long result = exerciseSurveyService.updateExerciseSurvey(exerciseRequestDto, userIdx);
-            return new BaseResponse(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         } catch (BaseException e) {
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
     }
 }

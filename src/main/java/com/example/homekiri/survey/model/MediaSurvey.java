@@ -1,5 +1,6 @@
 package com.example.homekiri.survey.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.survey.Dto.MediaRequestDto;
 import com.example.homekiri.user.model.User;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "MediaPreference")
-public class MediaSurvey {
+public class MediaSurvey extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +44,6 @@ public class MediaSurvey {
     private int watcha;
     private int wave;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     public MediaSurvey() {
     }

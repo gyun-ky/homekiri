@@ -1,5 +1,6 @@
 package com.example.homekiri.food.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name="FoodImage")
 @Entity
-public class FoodImage {
+public class FoodImage extends Auditable {
     @Id
     @Column(name = "idx")
     private Long idx;
@@ -29,17 +30,6 @@ public class FoodImage {
 
     @Column(name = "description")
     private String description;
-
-//    @OneToOne(mappedBy = "foodImage")
-//    private FoodActivity foodActivity;
-
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 
 }
