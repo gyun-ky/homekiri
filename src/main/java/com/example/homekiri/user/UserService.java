@@ -64,8 +64,8 @@ public class UserService {
         }
     }
 
-    public void validateNickname(String nickname) throws BaseException{
-        if(userRepository.findByNickname(nickname).isEmpty()==false){
+    public void validateNickname(String nickName) throws BaseException{
+        if(userRepository.findByNickname(nickName).isEmpty()==false){
             throw new BaseException(BaseResponseStatus.DUPLICATE_USER_NICKNAME);
         }
     }

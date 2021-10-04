@@ -56,7 +56,7 @@ public class User extends Auditable {
     public User(PostSignInReq postSignInReq, String password){
         this.email = postSignInReq.getEmail();
         this.password = password;
-        this.nickName = postSignInReq.getNickname();
+        this.nickName = postSignInReq.getNickName();
     }
 
 }

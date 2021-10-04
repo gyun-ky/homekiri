@@ -54,7 +54,7 @@ public class UserController {
     public ResponseEntity<? extends BaseResponse> signIn(@RequestBody PostSignInReq postSignInReq){
 
         try{
-            String encodedPassWord = userService.encodePassWord(postSignInReq.getPassword());
+            String encodedPassWord = userService.encodePassWord(postSignInReq.getPwd());
             User user = new User(postSignInReq, encodedPassWord);
             Long userIdx = userService.signIn(user);
             String jwt = jwtService.createJwt(userIdx);
