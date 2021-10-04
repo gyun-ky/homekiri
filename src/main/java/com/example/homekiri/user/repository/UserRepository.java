@@ -21,6 +21,7 @@ public class UserRepository{
     public Long save(User user){
         em.persist(user);
         em.flush();
+        System.out.println("[JPA] save complete");
         return user.getIdx();
     }
 

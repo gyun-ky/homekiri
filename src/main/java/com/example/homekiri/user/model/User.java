@@ -32,11 +32,11 @@ public class User extends Auditable {
 
     private String email;
 
-    private String password;
+    private String nickName;
+
+    private String pwd;
 
     private String profileImg = null;
-
-    private String nickName;
 
     @OneToOne(mappedBy = "user")
     private DessertSurvey dessertSurvey;
@@ -55,7 +55,7 @@ public class User extends Auditable {
     public User(){}
     public User(PostSignInReq postSignInReq, String password){
         this.email = postSignInReq.getEmail();
-        this.password = password;
+        this.pwd = password;
         this.nickName = postSignInReq.getNickName();
     }
 
