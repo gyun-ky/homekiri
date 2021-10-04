@@ -107,7 +107,7 @@ public class UserService {
         // 패스워드 decrypt
         Boolean pwMatch;
         try{
-            pwMatch = aes128.decrypt(user.getPassword()).equals(password);
+            pwMatch = aes128.decrypt(user.getPwd()).equals(password);
         }
         catch (Exception e){
             throw new BaseException(BaseResponseStatus.PASSWORD_DECRYPTION_ERROR);
