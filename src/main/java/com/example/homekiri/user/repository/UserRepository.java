@@ -45,9 +45,9 @@ public class UserRepository{
         return result;
     }
 
-    public List<User> findByNickname(String nickname){
-        List<User> result = em.createQuery("select u from User u where u.nickName = :nickname", User.class)
-                .setParameter("nickname", nickname).getResultList();
+    public List<User> findByNickname(String nickName){
+        List<User> result = em.createQuery("select u from User u where u.nickName = :nickName", User.class)
+                .setParameter("nickName", nickName).getResultList();
         System.out.println("[JPA] findByNickname complete");
         return result;
     }
