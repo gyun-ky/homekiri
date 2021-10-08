@@ -36,6 +36,26 @@ public class UserService {
         this.jwtService = jwtService;
     }
 
+    /**
+     JWT 인증 메서드
+     @param String JWT
+     @return BOOLEAN
+     */
+    public boolean jwtAuth(Long userIdx) throws BaseException{
+        try {
+            Long jwtUserIdx = this.jwtService.getUserIdx();
+            if(jwtUserIdx == userIdx){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch (BaseException e){
+            throw new BaseException(e.getStatus());
+        }
+
+    }
+
 
     /**
       Password encode

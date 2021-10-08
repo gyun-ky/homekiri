@@ -28,7 +28,13 @@ public class UserRepository{
     public User findUserByIdx(Long userIdx){
 
         User result = em.find(User.class, userIdx);
-        System.out.println("[REPO] findUserByIdx complete");
+        System.out.println("[JPA] findUserByIdx complete");
+        return result;
+    }
+
+    public User getReferenceByIdx(Long userIdx){
+        User result = em.getReference(User.class, userIdx);
+        System.out.println("[JPA] getReferenceByIdx complete");
         return result;
     }
 
