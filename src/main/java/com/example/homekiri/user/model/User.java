@@ -1,6 +1,7 @@
 package com.example.homekiri.user.model;
 
 import com.example.homekiri.config.Auditable;
+import com.example.homekiri.story.model.Story;
 import com.example.homekiri.survey.model.DessertSurvey;
 import com.example.homekiri.survey.model.ExerciseSurvey;
 import com.example.homekiri.survey.model.FoodSurvey;
@@ -18,6 +19,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 //외래키 preference랑 설정
 @Entity
 @Table(name="User")
@@ -50,7 +54,8 @@ public class User extends Auditable {
     @OneToOne(mappedBy = "user")
     private MediaSurvey mediaSurvey;
 
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Story> stories = new ArrayList<>();
 
     public User(){}
     public User(PostSignInReq postSignInReq, String password){

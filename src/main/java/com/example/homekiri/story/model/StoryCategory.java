@@ -1,6 +1,10 @@
 package com.example.homekiri.story.model;
 
 import com.example.homekiri.config.Auditable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -10,6 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="StoryCategory")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoryCategory extends Auditable {
 
     @Id
@@ -19,7 +28,7 @@ public class StoryCategory extends Auditable {
 
     private String categoryName;
 
-    @OneToMany(mappedBy = "storyCategory")
-    private List<Story> stories = new ArrayList<Story>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "storyCategory")
+    private List<StorySubCategory> storySubCategories = new ArrayList<>();
 
 }
