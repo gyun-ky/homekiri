@@ -1,6 +1,7 @@
 package com.example.homekiri.story.repository;
 
 import com.example.homekiri.story.model.Story;
+import com.example.homekiri.story.model.StoryLike;
 import com.example.homekiri.story.model.StorySubCategory;
 import com.example.homekiri.user.model.User;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,11 @@ public class StoryRepository {
     public void save(Story story){
         em.persist(story);
         System.out.println("[JPA] save complete");
+    }
+
+    public void saveLike(StoryLike like){
+        em.persist(like);
+        System.out.println("[JPA] saveLike complete");
     }
 
     public StorySubCategory findStorySubCategoryByIdx(Long idx){

@@ -62,6 +62,8 @@ public class StoryController {
      * [POST] /web/stories/like
      * @return BaseResponse<? extends BaseResponse>
      */
+    @ResponseBody
+    @PostMapping("/like")
     public ResponseEntity<? extends BaseResponse> createStoryLike(@RequestBody PostStoryLikeReq postStoryLikeReq) {
         try {
             if (!userService.jwtAuth(postStoryLikeReq.getUserIdx())) {
