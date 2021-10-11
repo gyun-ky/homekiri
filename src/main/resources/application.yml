@@ -16,10 +16,11 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     platform: mysql
-    url: jdbc:mysql://homekiri-db.cmi4erzbiz9b.ap-northeast-2.rds.amazonaws.com/homekiri?autoReconnect=true
+    url: jdbc:mariadb://homekiri-new.cws9rsilf8df.ap-northeast-2.rds.amazonaws.com/homekiri_new?autoReconnect=true
     username: admin
     password: homekiri0801!
-    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
+    driver-class-name : org.mariadb.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
     # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
 
 logging:
