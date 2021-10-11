@@ -4,6 +4,7 @@ import com.example.homekiri.config.BaseException;
 import com.example.homekiri.config.BaseResponseStatus;
 import com.example.homekiri.story.dto.PostStoryCreateReq;
 import com.example.homekiri.story.dto.PostStoryCreateRes;
+import com.example.homekiri.story.dto.PostStoryLikeReq;
 import com.example.homekiri.story.model.Story;
 import com.example.homekiri.story.model.StorySubCategory;
 import com.example.homekiri.story.repository.StoryRepository;
@@ -43,5 +44,16 @@ public class StoryService {
             throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
         }
 
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void createStoryLike(PostStoryLikeReq postStoryLikeReq) throws BaseException{
+        try{
+
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
     }
 }
