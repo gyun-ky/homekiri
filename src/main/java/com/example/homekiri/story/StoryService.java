@@ -6,6 +6,7 @@ import com.example.homekiri.story.dto.PostStoryCreateReq;
 import com.example.homekiri.story.dto.PostStoryCreateRes;
 import com.example.homekiri.story.dto.PostStoryLikeReq;
 import com.example.homekiri.story.model.Story;
+import com.example.homekiri.story.model.StoryLike;
 import com.example.homekiri.story.model.StorySubCategory;
 import com.example.homekiri.story.repository.StoryRepository;
 import com.example.homekiri.user.model.User;
@@ -26,6 +27,12 @@ public class StoryService {
         this.userRepository = userRepository;
     }
 
+
+    /**
+     스토리 등록 Service
+     @param PostStoryCreateReq
+     @return PostStoryCreateRes
+     */
     @Transactional(rollbackFor = Exception.class)
     public PostStoryCreateRes createStory(PostStoryCreateReq postStoryCreateReq) throws BaseException{
         // storySubCategory Select해오기
@@ -46,10 +53,18 @@ public class StoryService {
 
     }
 
+
+    /**
+     스토리 좋아요 등록
+     @param PostStoryLikeReq
+     @return void
+     */
     @Transactional(rollbackFor = Exception.class)
     public void createStoryLike(PostStoryLikeReq postStoryLikeReq) throws BaseException{
         try{
-
+            StoryLike newLike = new StoryLike(postStoryLikeReq.getUserIdx(), postStoryLikeReq.getStoryIdx());
+            storyRepository.saveLike(newLike);
+            System.out.println("[SERVICE] storyLike complete");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
