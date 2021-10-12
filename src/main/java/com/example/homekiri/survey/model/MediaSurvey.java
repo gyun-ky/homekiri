@@ -25,10 +25,12 @@ public class MediaSurvey extends Auditable {
     @JoinColumn(name = "userIdx")
     private User user;
 
+    private int action;
     private int animation;
     private int classic;
     private int comedy;
     private int crime;
+    private int drama;
     private int fantasy;
     private int horror;
     private int jtbc;
@@ -49,6 +51,7 @@ public class MediaSurvey extends Auditable {
     }
 
     public MediaSurvey(MediaRequestDto mediaRequestDto){
+        this.action = mediaRequestDto.getAction();
         this.animation = mediaRequestDto.getAnimation();
         this.classic = mediaRequestDto.getClassic();
         this.comedy = mediaRequestDto.getComedy();

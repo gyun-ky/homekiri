@@ -8,12 +8,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
+<<<<<<< HEAD
 import javax.persistence.MappedSuperclass;
+=======
+>>>>>>> worldcup
 import java.time.LocalDateTime;
 
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
+<<<<<<< HEAD
 @MappedSuperclass
+=======
+>>>>>>> worldcup
 @EntityListeners(AuditingEntityListener.class)
 public class Auditable {
 
