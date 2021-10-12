@@ -13,6 +13,8 @@ import com.example.homekiri.dashboard.service.MediaTrendListService;
 import com.example.homekiri.dashboard.service.WorkoutTrendListService;
 import com.example.homekiri.library.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,22 +60,23 @@ public class TrendListController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}/media-trend-list")
-    public BaseResponse<List<MediaTrendListResponseDto>> returnMediaTrend(@PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> returnMediaTrend(@PathVariable Long userIdx){
+
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
         try{
             List<MediaTrendListResponseDto> result = mediaTrendListService.returnMediaTrend();
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }
         catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
@@ -86,78 +89,79 @@ public class TrendListController {
      */
     @ResponseBody
     @GetMapping("/{userIdx}/food-trend-list")
-    public BaseResponse<List<FoodTrendListResponseDto>> returnFoodTrend(@PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> returnFoodTrend(@PathVariable Long userIdx){
+
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
         try{
             List<FoodTrendListResponseDto> result = foodTrendListService.returnFoodTrend();
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }
         catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
     /**
      * 디저트 트렌드 리스트 API
-     * [GET] /web/dashboard/dessert-trend-list
+     * [GET] /web/dashboard/{userIdx}/dessert-trend-list
      * @param Long userIdx
      * @return BaseResponse<List<DessertTrendListResponseDto>>
      * if (DessertTrendList is Null) Throw NO_TREND_LIST_ERROR
      */
     @ResponseBody
     @GetMapping("/{userIdx}/dessert-trend-list")
-    public BaseResponse<List<DessertTrendListResponseDto>> returnDessertTrend(@PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> returnDessertTrend(@PathVariable Long userIdx){
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
         try{
             List<DessertTrendListResponseDto> result = dessertTrendListService.returnDessertTrend();
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }
         catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
     /**
      * 운동 트렌드 리스트 API
-     * [GET] /web/dashboard/workout-trend-list
+     * [GET] /web/dashboard/{userIdx}/workout-trend-list
      * @param Long userIdx
      * @return BaseResponse<List<WorkoutTrendListResponseDto>>
      * if (WorkoutTrendList is Null) Throw NO_TREND_LIST_ERROR
      */
     @ResponseBody
     @GetMapping("/{userIdx}/workout-trend-list")
-    public BaseResponse<List<WorkoutTrendListResponseDto>> returnWorkoutTrend(@PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> returnWorkoutTrend(@PathVariable Long userIdx){
         //jwt 인증
         try {
             if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
         try{
             List<WorkoutTrendListResponseDto> result = workoutTrendListService.returnWorkoutTrend();
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }
         catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 }

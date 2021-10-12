@@ -1,5 +1,7 @@
 package com.example.homekiri.exercise.model;
 
+import com.example.homekiri.config.Auditable;
+import com.example.homekiri.like.model.LikeExercise;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Exercise")
 @Entity
-public class WorkoutActivity {
+public class WorkoutActivity extends Auditable {
     @Id
     @Column(name="idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,9 @@ public class WorkoutActivity {
     @JoinColumn(name = "targetIdx")
     private Target target;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workout")
+    private List<LikeExercise> likeExercises = new ArrayList<>();
+
     @Column(name="exerciseName")
     private String exerciseName;
 
@@ -46,23 +51,15 @@ public class WorkoutActivity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workoutActivity", cascade = CascadeType.ALL)
     private List<WorkoutVideo> workoutVideoList = new ArrayList<>();
 
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
     @Builder
-    public WorkoutActivity(Long idx, Type type, Difficulty difficulty, Target target, String exerciseName, String description, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public WorkoutActivity(Long idx, Type type, Difficulty difficulty, Target target, String exerciseName, String description){
         this.idx = idx;
         this.type = type;
         this.difficulty = difficulty;
         this.target  =target;
         this.exerciseName = exerciseName;
         this.description = description;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 }

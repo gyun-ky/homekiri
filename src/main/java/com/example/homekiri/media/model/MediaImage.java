@@ -1,5 +1,6 @@
 package com.example.homekiri.media.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name="MediaImage")
 @Entity
-public class MediaImage {
+public class MediaImage extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,24 +30,12 @@ public class MediaImage {
     @Column(name = "imgUrl")
     private String imgUrl;
 
-//    @OneToOne(mappedBy = "mediaImg")
-//    private MediaActivity mediaActivity;
-
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public MediaImage(Long idx, MediaActivity media, String description, String imgUrl, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public MediaImage(Long idx, MediaActivity media, String description, String imgUrl){
         this.idx = idx;
         this.media = media;
         this.description = description;
         this.imgUrl = imgUrl;
-        this.updatedAt = updatedAt;
-        this.createdAt =createdAt;
     }
 }

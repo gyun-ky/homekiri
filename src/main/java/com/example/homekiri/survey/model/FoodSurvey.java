@@ -1,6 +1,7 @@
 package com.example.homekiri.survey.model;
 
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.survey.Dto.FoodRequestDto;
 import com.example.homekiri.user.model.User;
 import lombok.Getter;
@@ -15,13 +16,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name="FoodPreference")
-public class FoodSurvey {
+public class FoodSurvey extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
     private User user;
 
@@ -40,11 +41,6 @@ public class FoodSurvey {
     private int raw;
     private int roasted;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     public FoodSurvey() {
     }

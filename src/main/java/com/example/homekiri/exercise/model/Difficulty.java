@@ -1,5 +1,6 @@
 package com.example.homekiri.exercise.model;
 
+import com.example.homekiri.config.Auditable;
 import com.example.homekiri.media.model.MediaActivity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Difficulty")
 @Entity
-public class Difficulty {
+public class Difficulty extends Auditable {
     @Id
     @Column(name="idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +27,5 @@ public class Difficulty {
     @Column(name = "status")
     private String status;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
 }

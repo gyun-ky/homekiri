@@ -7,6 +7,8 @@ import com.example.homekiri.library.JwtService;
 import com.example.homekiri.user.dto.*;
 import com.example.homekiri.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,17 +51,17 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping("/sign-in")
-    public BaseResponse<PostSignInRes> signIn(@RequestBody PostSignInReq postSignInReq){
+    public ResponseEntity<? extends BaseResponse> signIn(@RequestBody PostSignInReq postSignInReq){
 
         try{
-            String encodedPassWord = userService.encodePassWord(postSignInReq.getPassword());
+            String encodedPassWord = userService.encodePassWord(postSignInReq.getPwd());
             User user = new User(postSignInReq, encodedPassWord);
             Long userIdx = userService.signIn(user);
             String jwt = jwtService.createJwt(userIdx);
             PostSignInRes result = new PostSignInRes(userIdx, jwt);
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
@@ -70,12 +72,12 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping("/log-in")
-    public BaseResponse<PostLogInRes> logIn(@RequestBody PostLogInReq postLogInReq){
+    public ResponseEntity<? extends BaseResponse> logIn(@RequestBody PostLogInReq postLogInReq){
         try{
             PostLogInRes result = userService.logIn(postLogInReq.getEmail(), postLogInReq.getPassword());
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
     }
 
@@ -86,22 +88,22 @@ public class UserController {
      */
     @ResponseBody
     @GetMapping("/mypage/{userIdx}")
-    public BaseResponse<GetMypageRes> mypage(@PathVariable Long userIdx){
+    public ResponseEntity<? extends BaseResponse> mypage(@PathVariable Long userIdx){
         //jwt 인증
         try {
-            if (jwtAuth(userIdx) == false) {
+            if (!jwtAuth(userIdx)) {
                 throw new BaseException(BaseResponseStatus.INVALID_USER_JWT);
             }
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse<>(e.getStatus()));
         }
 
 
         try {
             GetMypageRes result = userService.getMypageInfo(userIdx);
-            return new BaseResponse<>(result);
+            return ResponseEntity.ok().body(new BaseResponse<>(result));
         }catch (BaseException e){
-            return new BaseResponse<>(e.getStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(e.getStatus()));
         }
 
     }

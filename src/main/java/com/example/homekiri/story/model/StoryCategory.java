@@ -1,5 +1,6 @@
 package com.example.homekiri.story.model;
 
+import com.example.homekiri.config.Auditable;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class StoryCategory {
+public class StoryCategory extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +22,4 @@ public class StoryCategory {
     @OneToMany(mappedBy = "storyCategory")
     private List<Story> stories = new ArrayList<Story>();
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 }

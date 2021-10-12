@@ -1,6 +1,7 @@
 package com.example.homekiri.dessert.model;
 
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="NonDrink")
 @Entity
-public class NonDrink {
+public class NonDrink extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,22 +34,12 @@ public class NonDrink {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "nonDrink")
     private List<DessertActivity> dessertActivityList;
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
-
 
     @Builder
-    public NonDrink(Long idx, String nonDrinkName, String temperature , String flavor, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public NonDrink(Long idx, String nonDrinkName, String temperature , String flavor){
         this.idx  = idx;
         this.nonDrinkName = nonDrinkName;
         this.temperature = temperature;
         this.flavor = flavor;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 }

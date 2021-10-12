@@ -1,6 +1,7 @@
 package com.example.homekiri.preferences;
 
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "DessertPreference")
-public class DessertPreference {
+public class DessertPreference extends Auditable {
     @Id
     @Column(name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,16 +60,9 @@ public class DessertPreference {
     @Column(name = "bitter")
     private Long bitter;
 
-    @LastModifiedDate
-    @Column(name="updatedAt")
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    @Column(name="createdAt")
-    private LocalDateTime createdAt;
 
     @Builder
-    public DessertPreference(Long idx, Long userIdx, Long coffee, Long nonCoffee, Long tea, Long smoothie, Long fruit, Long bakery, Long withIce, Long hot ,Long cold, Long sweet, Long sour, Long bitter, LocalDateTime createdAt, LocalDateTime updatedAt){
+    public DessertPreference(Long idx, Long userIdx, Long coffee, Long nonCoffee, Long tea, Long smoothie, Long fruit, Long bakery, Long withIce, Long hot ,Long cold, Long sweet, Long sour, Long bitter){
         this.idx = idx;
         this.userIdx = userIdx;
         this.coffee = coffee;
@@ -83,8 +77,6 @@ public class DessertPreference {
         this.sweet = sweet;
         this.sour = sour;
         this.bitter = bitter;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 
 }

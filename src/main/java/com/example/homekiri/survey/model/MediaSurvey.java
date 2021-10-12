@@ -24,10 +24,12 @@ public class MediaSurvey {
     @JoinColumn(name = "userIdx")
     private User user;
 
+    private int action;
     private int animation;
     private int classic;
     private int comedy;
     private int crime;
+    private int drama;
     private int fantasy;
     private int horror;
     private int jtbc;
@@ -53,6 +55,7 @@ public class MediaSurvey {
     }
 
     public MediaSurvey(MediaRequestDto mediaRequestDto){
+        this.action = mediaRequestDto.getAction();
         this.animation = mediaRequestDto.getAnimation();
         this.classic = mediaRequestDto.getClassic();
         this.comedy = mediaRequestDto.getComedy();

@@ -1,5 +1,6 @@
 package com.example.homekiri.food.model;
 
+import com.example.homekiri.config.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +16,13 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Food")
 @Entity
-public class FoodActivity {
+public class FoodActivity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
     private Long idx;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "countryIdx")
     private Country country;
 
@@ -46,20 +47,9 @@ public class FoodActivity {
     @Column(name="cookingState")
     private String cookingState;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idx", updatable = false, insertable = false)
-//    private FoodImage foodImage;
-
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public FoodActivity(Long idx, Country country, String foodName, String description , String ingredient, String recipe, String temperature, String cookingState, LocalDateTime updatedAt,LocalDateTime createdAt ){
+    public FoodActivity(Long idx, Country country, String foodName, String description , String ingredient, String recipe, String temperature, String cookingState){
         this.idx = idx;
         this.country = country;
         this.foodName = foodName;
@@ -68,8 +58,6 @@ public class FoodActivity {
         this.recipe = recipe;
         this.temperature = temperature;
         this.cookingState = cookingState;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
     }
 }
 

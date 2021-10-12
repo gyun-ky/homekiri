@@ -1,5 +1,7 @@
 package com.example.homekiri.media.model;
 
+import com.example.homekiri.config.Auditable;
+import com.example.homekiri.like.model.LikeMedia;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="Media")
 @Entity
-public class MediaActivity {
+public class MediaActivity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
@@ -41,21 +43,17 @@ public class MediaActivity {
     private String actorList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
+    private List<LikeMedia> likeMedias = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     private List<MediaImage> mediaImages = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     private List<MediaPlatform> mediaPlatformList = new ArrayList<>();
 
-    @Column(name="updatedAt")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name="createdAt")
-    @CreatedDate
-    private LocalDateTime createdAt;
 
     @Builder
-    public MediaActivity(Long idx, Genre genre, String mediaName, String description, int screeningYear, String country, String actorList, LocalDateTime updatedAt, LocalDateTime createdAt){
+    public MediaActivity(Long idx, Genre genre, String mediaName, String description, int screeningYear, String country, String actorList){
         this.idx = idx;
         this.genre = genre;
         this.mediaName = mediaName;
@@ -63,7 +61,5 @@ public class MediaActivity {
         this.screeningYear =screeningYear;
         this.country = country;
         this.actorList = actorList;
-        this.updatedAt = updatedAt;
-        this.createdAt =createdAt;
     }
 }

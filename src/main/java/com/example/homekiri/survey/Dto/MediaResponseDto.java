@@ -7,10 +7,12 @@ import lombok.Setter;
 @Getter
 public class MediaResponseDto {
     //MEDIA
+    private int action;
     private int animation;
     private int classic;
     private int comedy;
     private int crime;
+    private int drama;
     private int fantasy;
     private int horror;
     private int jtbc;

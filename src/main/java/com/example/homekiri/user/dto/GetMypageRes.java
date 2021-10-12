@@ -15,7 +15,9 @@ public class GetMypageRes {
     private String nickname;
     private String profileImageUrl;
 
-    private List<MypageLikeFood> likeFoods;
+    private List<MypageLikeFood> likeFoods = null;
+    private List<MypageLikeMedia> likeMedias = null;
+    private List<MypageLikeExercise> likeExercises = null;
 
 }
 

@@ -6,10 +6,10 @@ import com.example.homekiri.config.secret.Secret;
 import com.example.homekiri.library.AES128;
 import com.example.homekiri.library.JwtService;
 import com.example.homekiri.like.dto.LikeFoodDto;
+import com.example.homekiri.like.dto.LikeMediaDto;
+import com.example.homekiri.like.dto.LikeWorkoutDto;
 import com.example.homekiri.like.repository.LikeRepository;
-import com.example.homekiri.user.dto.GetMypageRes;
-import com.example.homekiri.user.dto.MypageLikeFood;
-import com.example.homekiri.user.dto.PostLogInRes;
+import com.example.homekiri.user.dto.*;
 import com.example.homekiri.user.model.User;
 import com.example.homekiri.user.repository.UserRepository;
 
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -63,8 +64,8 @@ public class UserService {
         }
     }
 
-    public void validateNickname(String nickname) throws BaseException{
-        if(userRepository.findByNickname(nickname).isEmpty()==false){
+    public void validateNickname(String nickName) throws BaseException{
+        if(userRepository.findByNickname(nickName).isEmpty()==false){
             throw new BaseException(BaseResponseStatus.DUPLICATE_USER_NICKNAME);
         }
     }
@@ -106,7 +107,7 @@ public class UserService {
         // 패스워드 decrypt
         Boolean pwMatch;
         try{
-            pwMatch = aes128.decrypt(user.getPassword()).equals(password);
+            pwMatch = aes128.decrypt(user.getPwd()).equals(password);
         }
         catch (Exception e){
             throw new BaseException(BaseResponseStatus.PASSWORD_DECRYPTION_ERROR);
@@ -129,19 +130,48 @@ public class UserService {
      */
     public GetMypageRes getMypageInfo(Long userIdx) throws BaseException{
         User user = null;
+        //dto
         List<LikeFoodDto> likeFoodDtos = null;
+        List<LikeMediaDto> likeMediaDtos = null;
+        Optional<List<LikeWorkoutDto>> likeWorkoutDtos = null;
+        //res
         List<MypageLikeFood> mypageLikeFoods = new ArrayList<>();
+        List<MypageLikeMedia> mypageLikeMedias = new ArrayList<>();
+        List<MypageLikeExercise> mypageLikeExercises = new ArrayList<>();
+
         try{
-        user = userRepository.findUserByIdx(userIdx);
-        likeFoodDtos = likeRepository.findLikeFoodByUserIdx(userIdx);
-        for(LikeFoodDto lf : likeFoodDtos){
-            mypageLikeFoods.add(new MypageLikeFood(lf));
-        }
+            user = userRepository.findUserByIdx(userIdx);
+            likeFoodDtos = likeRepository.findLikeFoodByUserIdx(userIdx);
+            likeMediaDtos = likeRepository.findLikeMediaByUserIdx(userIdx);
+            likeWorkoutDtos = likeRepository.findLikeExerciseByUserIdx(userIdx);
         }catch (Exception e){
             throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
         }
 
-        return new GetMypageRes(user.getNickName(), user.getProfileImg(), mypageLikeFoods);
+        if(likeFoodDtos != null) {
+            for (LikeFoodDto lf : likeFoodDtos) {
+                mypageLikeFoods.add(new MypageLikeFood(lf));
+            }
+        }
+        System.out.println("[SERVICE] likeFoodDtos complete");
+
+        if(likeMediaDtos != null) {
+            for (LikeMediaDto lm : likeMediaDtos) {
+                mypageLikeMedias.add(new MypageLikeMedia(lm));
+            }
+        }
+        System.out.println("[SERVICE] likeMediaDtos complete");
+
+        if(likeWorkoutDtos.isPresent()) {
+            for (LikeWorkoutDto lw : likeWorkoutDtos.get()) {
+                mypageLikeExercises.add(new MypageLikeExercise(lw));
+            }
+        }
+
+        System.out.println("[SERVICE] likeWorkOutDtos complete");
+
+
+        return new GetMypageRes(user.getNickName(), user.getProfileImg(), mypageLikeFoods, mypageLikeMedias, mypageLikeExercises);
     }
 
 }
