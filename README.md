@@ -19,6 +19,9 @@
 | 사용자 맞춤 활동 추천 | 성향조사와 활동을 분석하여 개인별 맞춤 활동를 추천한다. |
 | 게임형 설문조사 | 유행하는 여가활동 중 하나를 택하는 게임형식의 설문조사로, 사용자 측면에서는 선택의 재미를 얻을 수 있으며 서비스 측면에서는 데이터 수집 및 분석의 경로를 넓힐 수 있다. |
 
+[![video](https://i.ytimg.com/an_webp/1Pl3OQGbVdI/mqdefault_6s.webp?du=3000&sqp=COr7oI0G&rs=AOn4CLC5_YyB7WZ0Tw_8aTf6hWzgMgt08w)](https://youtu.be/1Pl3OQGbVdI)
+
+
 
 ## 구성도
 
