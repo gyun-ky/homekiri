@@ -28,6 +28,10 @@
 ## 구성도
 
 ![image](https://user-images.githubusercontent.com/79080825/135766317-7c11c3cf-170d-47d5-b414-3192d424bdd3.png)
+
+'''markdown
+<iframe width="1237" height="696" src="https://www.youtube.com/embed/1Pl3OQGbVdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'''
+
 ## 주요 기술
 ■ Python & Selenium : 크롤링을 통한 트렌드 데이터 수집 및 분석 
 
